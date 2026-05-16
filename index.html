@@ -3,616 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NOZIL</title>
-
-<link rel="manifest" href="manifest.json">
+<title>Game Baca Arab</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-font-family:'Segoe UI',sans-serif;
-background:#0f172a;
-min-height:100vh;
-color:white;
-overflow-x:hidden;
+  min-height:100vh;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
 }
 
-.bg{
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at top left,#2563eb55,transparent 35%),
-radial-gradient(circle at bottom right,#06b6d455,transparent 35%),
-linear-gradient(135deg,#020617,#0f172a,#111827);
-z-index:-2;
+.app{
+  width:100%;
+  max-width:420px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:28px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
 }
 
-.blur1,
-.blur2{
-position:fixed;
-border-radius:50%;
-filter:blur(90px);
-z-index:-1;
+h1{
+  font-size:26px;
+  margin-bottom:10px;
 }
 
-.blur1{
-width:250px;
-height:250px;
-background:#2563eb55;
-top:-50px;
-left:-50px;
+.level{
+  color:#38bdf8;
+  margin-bottom:20px;
 }
 
-.blur2{
-width:250px;
-height:250px;
-background:#06b6d455;
-bottom:-50px;
-right:-50px;
+.arabic{
+  font-size:60px;
+  margin:25px 0;
+  direction:rtl;
 }
 
-.header{
-padding:30px 20px 10px;
-text-align:center;
-}
-
-.logo{
-font-size:34px;
-font-weight:900;
-letter-spacing:4px;
-background:linear-gradient(90deg,#60a5fa,#22d3ee);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.sub{
-margin-top:8px;
-font-size:14px;
-color:#94a3b8;
-}
-
-.container{
-max-width:480px;
-margin:auto;
-padding:15px;
-}
-
-.card{
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:28px;
-padding:22px;
-box-shadow:
-0 10px 40px rgba(0,0,0,0.35),
-inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-.section-title{
-font-size:13px;
-font-weight:700;
-letter-spacing:1px;
-color:#94a3b8;
-margin-bottom:10px;
-margin-top:20px;
-text-transform:uppercase;
-}
-
-.input-group{
-margin-bottom:18px;
-}
-
-label{
-display:block;
-margin-bottom:8px;
-font-size:13px;
-font-weight:700;
-color:#cbd5e1;
-}
-
-select,
-textarea,
-input[type="number"],
-input[type="file"]{
-width:100%;
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:18px;
-padding:15px;
-font-size:15px;
-color:white;
-outline:none;
-transition:0.25s;
-}
-
-select:focus,
-textarea:focus,
-input:focus{
-border-color:#38bdf8;
-box-shadow:0 0 0 4px rgba(56,189,248,0.15);
-}
-
-option{
-background:#0f172a;
-}
-
-textarea{
-resize:none;
-min-height:100px;
-}
-
-.item-row{
-display:flex;
-align-items:center;
-gap:10px;
-margin-bottom:12px;
-}
-
-.item-row select{
-flex:2;
-}
-
-.item-row input{
-flex:1;
-text-align:center;
-}
-
-.item-row button{
-width:50px;
-padding:0;
-height:52px;
-border-radius:16px;
-background:#ef4444;
-font-size:20px;
+.latin{
+  font-size:22px;
+  color:#facc15;
+  margin-bottom:20px;
 }
 
 button{
-width:100%;
-padding:16px;
-margin-top:14px;
-border:none;
-border-radius:20px;
-font-size:15px;
-font-weight:800;
-cursor:pointer;
-transition:0.25s;
-color:white;
+  width:100%;
+  border:none;
+  padding:16px;
+  border-radius:18px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
 }
 
-.primary-btn{
-background:linear-gradient(135deg,#2563eb,#06b6d4);
-box-shadow:0 10px 30px rgba(37,99,235,0.35);
+.mic{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:white;
 }
 
-.primary-btn:hover{
-transform:translateY(-2px) scale(1.01);
+.repeat{
+  background:#334155;
+  color:white;
 }
 
-.secondary-btn{
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.08);
+.status{
+  margin-top:20px;
+  min-height:40px;
+  font-size:18px;
 }
 
-.secondary-btn:hover{
-background:rgba(255,255,255,0.1);
+.result{
+  margin-top:15px;
+  color:#cbd5e1;
+  font-size:15px;
 }
 
-.add-btn{
-background:rgba(255,255,255,0.08);
-border:1px dashed rgba(255,255,255,0.2);
-}
-
-.add-btn:hover{
-background:rgba(255,255,255,0.12);
-}
-
-img{
-width:100%;
-border-radius:22px;
-margin-top:12px;
-display:none;
-border:1px solid rgba(255,255,255,0.08);
-}
-
-#pilihWA .wa-row{
-padding:14px;
-margin-bottom:10px;
-border-radius:18px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.06);
-}
-
-.footer{
-text-align:center;
-padding:25px;
-font-size:12px;
-color:#64748b;
-}
-
+.correct{color:#4ade80}
+.wrong{color:#fb7185}
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="blur1"></div>
-<div class="blur2"></div>
+<div class="app">
+  <h1>🎮 Game Baca Arab</h1>
+  <div class="level" id="level">Level 1</div>
 
-<div class="header">
-<div class="logo">NOZIL</div>
-<div class="sub">Smart Data Management System</div>
-</div>
+  <div class="arabic" id="arabic">كِتَابٌ</div>
+  <div class="latin">Baca: <span id="latin">kitabun</span></div>
 
-<div class="container">
+  <button class="mic" onclick="startVoice()">🎤 Ucapkan Sekarang</button>
+  <button class="repeat" onclick="repeatWord()">🔊 Contoh Bacaan</button>
 
-<div class="card">
-
-<div class="section-title">Upload</div>
-
-<div class="input-group">
-<label>Foto</label>
-<input type="file" id="foto" accept="image/*">
-<img id="preview">
-</div>
-
-<div class="section-title">Informasi</div>
-
-<div class="input-group">
-<label>Jenis Data</label>
-<select id="jenis">
-<option value="Masuk">Masuk</option>
-<option value="Sisa">Sisa</option>
-</select>
-</div>
-
-<div class="input-group">
-<label>Lokasi</label>
-<select id="tempat">
-<option>Kantin Utama</option>
-<option>Kantin Cabang</option>
-<option>Outlet 1</option>
-<option>Outlet 2</option>
-</select>
-</div>
-
-<div class="section-title">Input Item</div>
-
-<div id="dynamicItems"></div>
-
-<button class="add-btn" onclick="tambahItem()">
-＋ Tambah Item
-</button>
-
-<div class="section-title">Catatan</div>
-
-<div class="input-group">
-<textarea id="catatan" placeholder="Tambahkan catatan tambahan..."></textarea>
-</div>
-
-<div class="section-title">WhatsApp</div>
-
-<div id="pilihWA"></div>
-
-<button class="primary-btn" onclick="kirim()">
-💾 Simpan Data
-</button>
-
-<button class="secondary-btn" onclick="location.href='laporan.html'">
-📊 Laporan
-</button>
-
-<button class="secondary-btn" onclick="location.href='setting.html'">
-⚙️ Pengaturan
-</button>
-
-</div>
-
-<div class="footer">
-NOZIL • Modern Dashboard System
-</div>
-
+  <div class="status" id="status">Tekan tombol mic lalu ucapkan.</div>
+  <div class="result" id="result"></div>
 </div>
 
 <script>
+const questions = [
+  { arabic:"كِتَابٌ", latin:"kitabun" },
+  { arabic:"بَيْتٌ", latin:"baitun" },
+  { arabic:"قَلَمٌ", latin:"qolamun" },
+  { arabic:"مَسْجِدٌ", latin:"masjidun" },
+  { arabic:"بَابٌ", latin:"babun" },
+  { arabic:"مَكْتَبٌ", latin:"maktabun" },
+  { arabic:"سَيَّارَةٌ", latin:"sayyarotun" },
+  { arabic:"مَدْرَسَةٌ", latin:"madrosatun" }
+];
 
-let daftarItems=[];
+let index = 0;
 
-// PREVIEW FOTO
-document.getElementById("foto").addEventListener("change",function(){
-
-let file=this.files[0];
-
-if(!file) return;
-
-let reader=new FileReader();
-
-reader.onload=e=>{
-
-let img=document.getElementById("preview");
-
-img.src=e.target.result;
-
-img.style.display="block";
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-// FORMAT TANGGAL
-function formatTanggal(){
-
-let hari=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
-
-let bulan=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-
-let d=new Date();
-
-return `${hari[d.getDay()]}, ${d.getDate()} ${bulan[d.getMonth()]}`;
-
+function showQuestion(){
+  document.getElementById("level").innerText = "Level " + (index + 1);
+  document.getElementById("arabic").innerText = questions[index].arabic;
+  document.getElementById("latin").innerText = questions[index].latin;
+  document.getElementById("status").innerText = "Tekan tombol mic lalu ucapkan.";
+  document.getElementById("status").className = "status";
+  document.getElementById("result").innerText = "";
 }
 
-// LOAD ITEM
-function loadItems(){
-
-db.ref("items").once("value",snap=>{
-
-daftarItems=[];
-
-snap.forEach(c=>{
-
-let data=c.val();
-
-let nama=data.nama || data;
-
-daftarItems.push(nama);
-
-});
-
-tambahItem();
-
-});
-
+function normalize(text){
+  return text
+    .toLowerCase()
+    .replaceAll("kh","h")
+    .replaceAll("q","k")
+    .replaceAll("sh","s")
+    .replaceAll("sy","s")
+    .replaceAll("aa","a")
+    .replaceAll("oo","o")
+    .replaceAll("ā","a")
+    .replaceAll("ū","u")
+    .replaceAll("ī","i")
+    .replace(/[^a-z\s]/g,"")
+    .trim();
 }
 
-// TAMBAH ITEM
-function tambahItem(){
+function startVoice(){
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-let container=document.getElementById("dynamicItems");
+  if(!SpeechRecognition){
+    alert("Browser tidak mendukung voice recognition. Coba pakai Google Chrome.");
+    return;
+  }
 
-let div=document.createElement("div");
+  const recognition = new SpeechRecognition();
+  recognition.lang = "id-ID";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
 
-div.className="item-row";
+  document.getElementById("status").innerText = "🎧 Mendengarkan...";
+  document.getElementById("status").className = "status";
 
-let options='<option value="">Tambah Item</option>';
+  recognition.start();
 
-daftarItems.forEach(item=>{
+  recognition.onresult = function(event){
+    const heard = event.results[0][0].transcript;
+    const target = questions[index].latin;
 
-options += `<option value="${item}">${item}</option>`;
+    document.getElementById("result").innerText = "Terdengar: " + heard;
 
-});
+    const cleanHeard = normalize(heard);
+    const cleanTarget = normalize(target);
 
-div.innerHTML=`
+    if(cleanHeard.includes(cleanTarget)){
+      document.getElementById("status").innerText = "✅ Benar! Lanjut...";
+      document.getElementById("status").className = "status correct";
 
-<select class="barang">
-${options}
-</select>
+      setTimeout(() => {
+        index++;
+        if(index >= questions.length){
+          document.querySelector(".app").innerHTML = `
+            <h1>🎉 Selesai!</h1>
+            <p style="font-size:20px;margin:20px 0">MasyaAllah, semua level berhasil.</p>
+            <button class="mic" onclick="location.reload()">Main Lagi</button>
+          `;
+        }else{
+          showQuestion();
+        }
+      }, 1200);
 
-<input type="number" class="jumlah" placeholder="0">
+    }else{
+      document.getElementById("status").innerText = "❌ Salah. Ulangi lagi.";
+      document.getElementById("status").className = "status wrong";
+    }
+  };
 
-<button onclick="hapusItem(this)">×</button>
-
-`;
-
-container.appendChild(div);
-
+  recognition.onerror = function(){
+    document.getElementById("status").innerText = "Mic gagal. Coba ulangi.";
+    document.getElementById("status").className = "status wrong";
+  };
 }
 
-// HAPUS ITEM
-function hapusItem(btn){
-
-btn.parentElement.remove();
-
+function repeatWord(){
+  const text = questions[index].latin;
+  const voice = new SpeechSynthesisUtterance(text);
+  voice.lang = "id-ID";
+  voice.rate = 0.75;
+  speechSynthesis.speak(voice);
 }
 
-// LOAD WA
-function loadWAOptions(){
-
-let container=document.getElementById("pilihWA");
-
-container.innerHTML="Loading...";
-
-db.ref("config/wa").once("value",snap=>{
-
-let wa=snap.val() || {};
-
-container.innerHTML="";
-
-for(let i=1;i<=4;i++){
-
-if(wa["wa"+i]){
-
-let div=document.createElement("div");
-
-div.className="wa-row";
-
-div.innerHTML=`
-
-<label>
-<input type="radio" name="wa" value="${wa["wa"+i]}">
-${wa["wa"+i]}
-</label>
-
-`;
-
-container.appendChild(div);
-
-}
-
-}
-
-if(container.innerHTML===""){
-container.innerHTML="Belum ada nomor";
-}
-
-});
-
-}
-
-// SIMPAN
-async function kirim(){
-
-let items=[];
-
-document.querySelectorAll(".item-row").forEach(row=>{
-
-let barang=row.querySelector(".barang").value;
-
-let jumlah=row.querySelector(".jumlah").value;
-
-if(barang && jumlah && jumlah!=0){
-
-items.push({
-barang:barang,
-jumlah:Number(jumlah)
-});
-
-}
-
-});
-
-// FOTO
-let fotoBase64="";
-
-let f=document.getElementById("foto").files[0];
-
-if(f){
-fotoBase64=await kompresGambar(f);
-}
-
-// DATA
-let data={
-
-waktu:new Date().toISOString(),
-
-tempat:document.getElementById("tempat").value,
-
-jenis:document.getElementById("jenis").value,
-
-items:items,
-
-catatan:document.getElementById("catatan").value,
-
-foto:fotoBase64
-
-};
-
-await db.ref("jajan").push(data);
-
-// AUTO WA
-let selected=document.querySelector('input[name="wa"]:checked');
-
-if(selected){
-
-let teks=formatTanggal()+"\n";
-
-teks += `${data.jenis} - ${data.tempat}\n\n`;
-
-data.items.forEach(i=>{
-
-teks += `${i.barang} : ${i.jumlah}\n`;
-
-});
-
-if(data.catatan){
-
-teks += `\nCatatan:\n${data.catatan}`;
-
-}
-
-let url=`https://wa.me/${selected.value}?text=${encodeURIComponent(teks)}`;
-
-window.open(url,"_blank");
-
-}
-
-alert("Data berhasil disimpan");
-
-location.reload();
-
-}
-
-// KOMPRES FOTO
-function kompresGambar(file){
-
-return new Promise(resolve=>{
-
-let reader=new FileReader();
-
-reader.onload=e=>{
-
-let img=new Image();
-
-img.src=e.target.result;
-
-img.onload=()=>{
-
-let canvas=document.createElement("canvas");
-
-let scale=500/img.width;
-
-canvas.width=500;
-
-canvas.height=img.height*scale;
-
-let ctx=canvas.getContext("2d");
-
-ctx.drawImage(img,0,0,canvas.width,canvas.height);
-
-resolve(canvas.toDataURL("image/jpeg",0.6));
-
-};
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-</script>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
-<script>
-
-firebase.initializeApp({
-
-databaseURL:"https://maqshof-d5772-default-rtdb.asia-southeast1.firebasedatabase.app"
-
-});
-
-const db=firebase.database();
-
-window.onload=function(){
-
-loadItems();
-
-loadWAOptions();
-
-}
-
+showQuestion();
 </script>
 
 </body>
