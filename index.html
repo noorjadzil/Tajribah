@@ -140,7 +140,30 @@ resize:none;
 <option>Ikhwan</option>
 <option>Akhwat</option>
 </select>
+<!-- DROPDOWN ATAS 4 BARIS -->
+<div id="dropdownAtas">
+<div class="row"><select id="atas1"><option value="">-- Pilih --</option></select><input type="number" id="atas1_jumlah" placeholder="Jumlah"></div>
+<div class="row"><select id="atas2"><option value="">-- Pilih --</option></select><input type="number" id="atas2_jumlah" placeholder="Jumlah"></div>
+<div class="row"><select id="atas3"><option value="">-- Pilih --</option></select><input type="number" id="atas3_jumlah" placeholder="Jumlah"></div>
+<div class="row"><select id="atas4"><option value="">-- Pilih --</option></select><input type="number" id="atas4_jumlah" placeholder="Jumlah"></div>
+</div>
 
+<!-- INPUT ITEM YANG SUDAH ADA -->
+<div id="dynamicItems"></div>
+
+<!-- DROPDOWN TENGAH 2 BARIS -->
+<div id="dropdownTengah">
+<div class="row"><select id="tengah1"><option value="">-- Pilih --</option></select><input type="number" id="tengah1_jumlah" placeholder="Jumlah"></div>
+<div class="row"><select id="tengah2"><option value="">-- Pilih --</option></select><input type="number" id="tengah2_jumlah" placeholder="Jumlah"></div>
+</div>
+
+<!-- DROPDOWN BAWAH 4 BARIS -->
+<div id="dropdownBawah">
+<div class="row"><select id="bawah1"><option value="">-- Pilih --</option></select><input type="number" id="bawah1_jumlah" placeholder="Jumlah"></div>
+<div class="row"><select id="bawah2"><option value="">-- Pilih --</option></select><input type="number" id="bawah2_jumlah" placeholder="Jumlah"></div>
+<div class="row"><select id="bawah3"><option value="">-- Pilih --</option></select><input type="number" id="bawah3_jumlah" placeholder="Jumlah"></div>
+<div class="row"><select id="bawah4"><option value="">-- Pilih --</option></select><input type="number" id="bawah4_jumlah" placeholder="Jumlah"></div>
+</div>
 <!-- INPUT SEMUA -->
 <div id="dynamicItems"></div>
 
@@ -271,24 +294,27 @@ container.appendChild(div);
 // DROPDOWN
 function loadDropdownItems(){
 
-let slot1=document.getElementById("slot1");
-let slot2=document.getElementById("slot2");
+let ids=[
+"atas1","atas2","atas3","atas4",
+"tengah1","tengah2",
+"bawah1","bawah2","bawah3","bawah4"
+];
 
-slot1.innerHTML='<option value="">-- Pilih --</option>';
-slot2.innerHTML='<option value="">-- Pilih --</option>';
+ids.forEach(id=>{
+document.getElementById(id).innerHTML='<option value="">-- Pilih --</option>';
+});
 
 db.ref("items").once("value",snap=>{
 snap.forEach(c=>{
-
 let data=c.val();
 let nama=data.nama || data;
 
+ids.forEach(id=>{
 let opt=document.createElement("option");
 opt.value=nama;
 opt.textContent=nama;
-
-slot1.appendChild(opt.cloneNode(true));
-slot2.appendChild(opt.cloneNode(true));
+document.getElementById(id).appendChild(opt);
+});
 
 });
 });
@@ -360,19 +386,28 @@ let barang=document.getElementById(idBarang).value;
 let jumlah=document.getElementById(idJumlah).value;
 
 if(barang && jumlah && jumlah!=0){
-
 items.push({
 barang:barang,
 jumlah:Number(jumlah)
 });
-
 }
 
 }
 
-tambahSlot("slot1","slot1_jumlah");
-tambahSlot("slot2","slot2_jumlah");
-
+[
+["atas1","atas1_jumlah"],
+["atas2","atas2_jumlah"],
+["atas3","atas3_jumlah"],
+["atas4","atas4_jumlah"],
+["tengah1","tengah1_jumlah"],
+["tengah2","tengah2_jumlah"],
+["bawah1","bawah1_jumlah"],
+["bawah2","bawah2_jumlah"],
+["bawah3","bawah3_jumlah"],
+["bawah4","bawah4_jumlah"]
+].forEach(s=>{
+tambahSlot(s[0],s[1]);
+});
 // MANUAL
 for(let i=1;i<=3;i++){
 
