@@ -1,215 +1,516 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Baca Arab</title>
+<title>Input Jajan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
 body{
-  min-height:100vh;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+font-family:'Segoe UI',Arial;
+margin:0;
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
 }
-
-.app{
-  width:100%;
-  max-width:420px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:28px;
-  padding:25px;
-  text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
+.container{
+max-width:420px;
+margin:auto;
+padding:10px;
 }
-
-h1{
-  font-size:26px;
-  margin-bottom:10px;
+.card{
+background:white;
+border-radius:16px;
+padding:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
-
-.level{
-  color:#38bdf8;
-  margin-bottom:20px;
+.tabs{
+display:flex;
+background:#1e3a8a;
+border-radius:12px 12px 0 0;
+overflow:hidden;
+margin-bottom:10px;
 }
-
-.arabic{
-  font-size:60px;
-  margin:25px 0;
-  direction:rtl;
+.tab-btn{
+flex:1;
+padding:12px;
+border:none;
+background:transparent;
+color:white;
+font-weight:700;
 }
-
-.latin{
-  font-size:22px;
-  color:#facc15;
-  margin-bottom:20px;
+.tab-btn.active{
+background:#3b82f6;
 }
-
+h2{
+text-align:center;
+color:#1e3a8a;
+}
+label{
+font-weight:700;
+font-size:13px;
+margin-top:8px;
+display:block;
+}
+select,input[type="number"],input[type="text"]{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:1px solid #cbd5f5;
+margin-bottom:10px;
+font-weight:600;
+box-sizing:border-box;
+}
+input[type="number"]{
+text-align:center;
+font-size:16px;
+}
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+border-bottom:1px solid #eee;
+padding:8px 0;
+}
+.row input{
+width:120px;
+}
 button{
-  width:100%;
-  border:none;
-  padding:16px;
-  border-radius:18px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-top:10px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#1e3a8a;
+color:white;
+font-weight:700;
+margin-top:10px;
 }
-
-.mic{
-  background:linear-gradient(135deg,#22c55e,#16a34a);
-  color:white;
+img{
+width:100%;
+border-radius:10px;
+margin-top:8px;
 }
-
-.repeat{
-  background:#334155;
-  color:white;
+#catatan{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:10px;
+border:1px solid #cbd5f5;
+font-size:15px;
+font-weight:600;
+box-sizing:border-box;
+resize:none;
 }
-
-.status{
-  margin-top:20px;
-  min-height:40px;
-  font-size:18px;
-}
-
-.result{
-  margin-top:15px;
-  color:#cbd5e1;
-  font-size:15px;
-}
-
-.correct{color:#4ade80}
-.wrong{color:#fb7185}
 </style>
 </head>
 
 <body>
 
-<div class="app">
-  <h1>🎮 Game Baca Arab</h1>
-  <div class="level" id="level">Level 1</div>
+<div class="container">
 
-  <div class="arabic" id="arabic">كِتَابٌ</div>
-  <div class="latin">Baca: <span id="latin">kitabun</span></div>
+<div class="tabs">
+<button class="tab-btn active" onclick="showTab('input',event)">Input</button>
+</div>
 
-  <button class="mic" onclick="startVoice()">🎤 Ucapkan Sekarang</button>
-  <button class="repeat" onclick="repeatWord()">🔊 Contoh Bacaan</button>
+<div class="card">
 
-  <div class="status" id="status">Tekan tombol mic lalu ucapkan.</div>
-  <div class="result" id="result"></div>
+<div id="inputTab">
+
+<h2>Input Jajan</h2>
+
+<label>Foto</label>
+<input type="file" id="foto" accept="image/*">
+<img id="preview" style="display:none">
+
+<label>Jenis</label>
+<select id="jenis">
+<option value="Masuk">Masuk</option>
+<option value="Sisa">Sisa</option>
+</select>
+
+<label>Metode Input</label>
+<select id="metodeInput" onchange="ubahMetodeInput()">
+<option value="semua">Input Semua</option>
+<option value="dropdown">Pilih Dropdown</option>
+<option value="manual">Input Manual</option>
+<option value="campuran">Campuran</option>
+</select>
+
+<label>Tempat</label>
+<select id="tempat">
+<option>Ikhwan</option>
+<option>Akhwat</option>
+</select>
+
+<!-- INPUT SEMUA -->
+<div id="dynamicItems"></div>
+
+<!-- DROPDOWN -->
+<div class="row" id="dropdown1">
+<select id="slot1">
+<option value="">-- Pilih --</option>
+</select>
+<input type="number" id="slot1_jumlah" placeholder="Jumlah">
+</div>
+
+<div class="row" id="dropdown2">
+<select id="slot2">
+<option value="">-- Pilih --</option>
+</select>
+<input type="number" id="slot2_jumlah" placeholder="Jumlah">
+</div>
+
+<!-- INPUT MANUAL -->
+<div id="manualArea">
+
+<div class="row">
+<input type="text" id="manual_barang1" placeholder="Nama Barang">
+<input type="number" id="manual_jumlah1" placeholder="Jumlah">
+</div>
+
+<div class="row">
+<input type="text" id="manual_barang2" placeholder="Nama Barang">
+<input type="number" id="manual_jumlah2" placeholder="Jumlah">
+</div>
+
+<div class="row">
+<input type="text" id="manual_barang3" placeholder="Nama Barang">
+<input type="number" id="manual_jumlah3" placeholder="Jumlah">
+</div>
+
+</div>
+
+<label>Catatan</label>
+<textarea id="catatan"></textarea>
+
+<label>Pilih Kirim ke WA</label>
+<div id="pilihWA"></div>
+
+<button onclick="kirim()">💾 Simpan</button>
+<button onclick="location.href='laporan.html'">📊 Lihat Laporan</button>
+<button onclick="location.href='setting.html'">⚙️ Setting</button>
+
+</div>
+</div>
 </div>
 
 <script>
-const questions = [
-  { arabic:"كِتَابٌ", latin:"kitabun" },
-  { arabic:"بَيْتٌ", latin:"baitun" },
-  { arabic:"قَلَمٌ", latin:"qolamun" },
-  { arabic:"مَسْجِدٌ", latin:"masjidun" },
-  { arabic:"بَابٌ", latin:"babun" },
-  { arabic:"مَكْتَبٌ", latin:"maktabun" },
-  { arabic:"سَيَّارَةٌ", latin:"sayyarotun" },
-  { arabic:"مَدْرَسَةٌ", latin:"madrosatun" }
-];
 
-let index = 0;
-
-function showQuestion(){
-  document.getElementById("level").innerText = "Level " + (index + 1);
-  document.getElementById("arabic").innerText = questions[index].arabic;
-  document.getElementById("latin").innerText = questions[index].latin;
-  document.getElementById("status").innerText = "Tekan tombol mic lalu ucapkan.";
-  document.getElementById("status").className = "status";
-  document.getElementById("result").innerText = "";
+// FORMAT TANGGAL
+function formatTanggal(){
+let hari=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+let bulan=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+let d=new Date();
+return `${hari[d.getDay()]}, ${d.getDate()} ${bulan[d.getMonth()]}`;
 }
 
-function normalize(text){
-  return text
-    .toLowerCase()
-    .replaceAll("kh","h")
-    .replaceAll("q","k")
-    .replaceAll("sh","s")
-    .replaceAll("sy","s")
-    .replaceAll("aa","a")
-    .replaceAll("oo","o")
-    .replaceAll("ā","a")
-    .replaceAll("ū","u")
-    .replaceAll("ī","i")
-    .replace(/[^a-z\s]/g,"")
-    .trim();
+// UBAH METODE
+function ubahMetodeInput(){
+
+let metode=document.getElementById("metodeInput").value;
+
+let dynamic=document.getElementById("dynamicItems");
+let dropdown1=document.getElementById("dropdown1");
+let dropdown2=document.getElementById("dropdown2");
+let manual=document.getElementById("manualArea");
+
+if(metode==="semua"){
+dynamic.style.display="block";
+dropdown1.style.display="none";
+dropdown2.style.display="none";
+manual.style.display="none";
 }
 
-function startVoice(){
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if(!SpeechRecognition){
-    alert("Browser tidak mendukung voice recognition. Coba pakai Google Chrome.");
-    return;
-  }
-
-  const recognition = new SpeechRecognition();
-  recognition.lang = "id-ID";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  document.getElementById("status").innerText = "🎧 Mendengarkan...";
-  document.getElementById("status").className = "status";
-
-  recognition.start();
-
-  recognition.onresult = function(event){
-    const heard = event.results[0][0].transcript;
-    const target = questions[index].latin;
-
-    document.getElementById("result").innerText = "Terdengar: " + heard;
-
-    const cleanHeard = normalize(heard);
-    const cleanTarget = normalize(target);
-
-    if(cleanHeard.includes(cleanTarget)){
-      document.getElementById("status").innerText = "✅ Benar! Lanjut...";
-      document.getElementById("status").className = "status correct";
-
-      setTimeout(() => {
-        index++;
-        if(index >= questions.length){
-          document.querySelector(".app").innerHTML = `
-            <h1>🎉 Selesai!</h1>
-            <p style="font-size:20px;margin:20px 0">MasyaAllah, semua level berhasil.</p>
-            <button class="mic" onclick="location.reload()">Main Lagi</button>
-          `;
-        }else{
-          showQuestion();
-        }
-      }, 1200);
-
-    }else{
-      document.getElementById("status").innerText = "❌ Salah. Ulangi lagi.";
-      document.getElementById("status").className = "status wrong";
-    }
-  };
-
-  recognition.onerror = function(){
-    document.getElementById("status").innerText = "Mic gagal. Coba ulangi.";
-    document.getElementById("status").className = "status wrong";
-  };
+if(metode==="dropdown"){
+dynamic.style.display="none";
+dropdown1.style.display="flex";
+dropdown2.style.display="flex";
+manual.style.display="none";
 }
 
-function repeatWord(){
-  const text = questions[index].latin;
-  const voice = new SpeechSynthesisUtterance(text);
-  voice.lang = "id-ID";
-  voice.rate = 0.75;
-  speechSynthesis.speak(voice);
+if(metode==="manual"){
+dynamic.style.display="none";
+dropdown1.style.display="none";
+dropdown2.style.display="none";
+manual.style.display="block";
 }
 
-showQuestion();
+if(metode==="campuran"){
+dynamic.style.display="block";
+dropdown1.style.display="flex";
+dropdown2.style.display="flex";
+manual.style.display="block";
+}
+
+}
+
+// LOAD ITEM
+function loadItems(){
+let container=document.getElementById("dynamicItems");
+container.innerHTML="";
+
+db.ref("items").once("value",snap=>{
+snap.forEach(c=>{
+
+let data=c.val();
+let nama=data.nama || data;
+
+let div=document.createElement("div");
+div.className="row";
+
+div.innerHTML=`
+<span>${nama}</span>
+<input type="number" data-nama="${nama}">
+`;
+
+container.appendChild(div);
+
+});
+});
+}
+
+// DROPDOWN
+function loadDropdownItems(){
+
+let slot1=document.getElementById("slot1");
+let slot2=document.getElementById("slot2");
+
+slot1.innerHTML='<option value="">-- Pilih --</option>';
+slot2.innerHTML='<option value="">-- Pilih --</option>';
+
+db.ref("items").once("value",snap=>{
+snap.forEach(c=>{
+
+let data=c.val();
+let nama=data.nama || data;
+
+let opt=document.createElement("option");
+opt.value=nama;
+opt.textContent=nama;
+
+slot1.appendChild(opt.cloneNode(true));
+slot2.appendChild(opt.cloneNode(true));
+
+});
+});
+}
+
+// LOAD WA
+function loadWAOptions(){
+
+let container=document.getElementById("pilihWA");
+container.innerHTML="Loading...";
+
+db.ref("config/wa").once("value",snap=>{
+
+let wa=snap.val() || {};
+container.innerHTML="";
+
+for(let i=1;i<=4;i++){
+
+if(wa["wa"+i]){
+
+let div=document.createElement("div");
+div.className="row";
+
+div.innerHTML=`
+<label>
+<input type="radio" name="wa" value="${wa["wa"+i]}">
+${wa["wa"+i]}
+</label>
+`;
+
+container.appendChild(div);
+
+}
+
+}
+
+if(container.innerHTML===""){
+container.innerHTML="Belum ada nomor WA";
+}
+
+});
+}
+
+// SIMPAN
+async function kirim(){
+
+let items=[];
+
+// INPUT SEMUA
+document.querySelectorAll("#dynamicItems input").forEach(input=>{
+
+let val=input.value;
+
+if(val && val!=0){
+
+items.push({
+barang:input.dataset.nama,
+jumlah:Number(val)
+});
+
+}
+
+});
+
+// DROPDOWN
+function tambahSlot(idBarang,idJumlah){
+
+let barang=document.getElementById(idBarang).value;
+let jumlah=document.getElementById(idJumlah).value;
+
+if(barang && jumlah && jumlah!=0){
+
+items.push({
+barang:barang,
+jumlah:Number(jumlah)
+});
+
+}
+
+}
+
+tambahSlot("slot1","slot1_jumlah");
+tambahSlot("slot2","slot2_jumlah");
+
+// MANUAL
+for(let i=1;i<=3;i++){
+
+let barang=document.getElementById("manual_barang"+i).value;
+let jumlah=document.getElementById("manual_jumlah"+i).value;
+
+if(barang && jumlah && jumlah!=0){
+
+items.push({
+barang:barang,
+jumlah:Number(jumlah)
+});
+
+}
+
+}
+
+// FOTO
+let fotoBase64="";
+let f=document.getElementById("foto").files[0];
+
+if(f){
+fotoBase64=await kompresGambar(f);
+}
+
+// DATA
+let data={
+waktu:new Date().toISOString(),
+tempat:document.getElementById("tempat").value,
+jenis:document.getElementById("jenis").value,
+items:items,
+catatan:document.getElementById("catatan").value,
+foto:fotoBase64
+};
+
+await db.ref("jajan").push(data);
+
+// WA
+let selected=document.querySelector('input[name="wa"]:checked');
+
+if(selected){
+
+let teks=formatTanggal()+"\n";
+teks += `${data.jenis} - ${data.tempat}\n\n`;
+
+data.items.forEach(i=>{
+teks += `${i.barang} ${i.jumlah}\n`;
+});
+
+let url=`https://wa.me/${selected.value}?text=${encodeURIComponent(teks)}`;
+window.open(url,"_blank");
+
+}
+
+alert("Berhasil disimpan");
+location.reload();
+
+}
+
+// KOMPRES
+function kompresGambar(file){
+
+return new Promise(resolve=>{
+
+let reader=new FileReader();
+
+reader.onload=e=>{
+
+let img=new Image();
+img.src=e.target.result;
+
+img.onload=()=>{
+
+let canvas=document.createElement("canvas");
+
+let scale=400/img.width;
+
+canvas.width=400;
+canvas.height=img.height*scale;
+
+let ctx=canvas.getContext("2d");
+
+ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+resolve(canvas.toDataURL("image/jpeg",0.5));
+
+};
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script>
+
+firebase.initializeApp({
+databaseURL:"https://maqshof-d5772-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
+
+const db=firebase.database();
+
+window.onload=function(){
+
+loadItems();
+loadDropdownItems();
+loadWAOptions();
+ubahMetodeInput();
+
+}
+
+// CONFIG
+db.ref("config").once("value",snap=>{
+
+let c=snap.val();
+
+if(!c) return;
+
+if(c.label){
+document.querySelector("h2").innerText="Input "+c.label;
+}
+
+if(c.theme){
+
+document.body.style.background=
+`linear-gradient(135deg,${c.theme.bg},${c.theme.primary})`;
+
+}
+
+});
+
 </script>
 
 </body>
