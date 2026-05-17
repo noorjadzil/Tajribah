@@ -1,15 +1,21 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#050816"/>
-  <circle cx="250" cy="120" r="260" fill="#2563eb" opacity="0.35"/>
-  <circle cx="980" cy="130" r="250" fill="#22d3ee" opacity="0.24"/>
-  <circle cx="690" cy="600" r="270" fill="#8b5cf6" opacity="0.25"/>
-  <rect x="92" y="92" width="1016" height="446" rx="44" fill="white" opacity="0.08" stroke="white" stroke-opacity="0.18"/>
-  <text x="120" y="250" fill="white" font-family="Arial" font-size="70" font-weight="900">Jasa Pembuatan</text>
-  <text x="120" y="335" fill="#67e8f9" font-family="Arial" font-size="82" font-weight="900">Aplikasi Modern</text>
-  <text x="123" y="405" fill="#cbd5e1" font-family="Arial" font-size="32" font-weight="600">Laporan • Absensi • Stok • Kasir • Rekap Data</text>
-  <rect x="820" y="170" width="210" height="300" rx="34" fill="#07111f" stroke="white" stroke-opacity="0.2"/>
-  <rect x="845" y="205" width="160" height="70" rx="18" fill="#2563eb"/>
-  <rect x="845" y="295" width="160" height="28" rx="14" fill="white" opacity="0.14"/>
-  <rect x="845" y="340" width="160" height="28" rx="14" fill="white" opacity="0.14"/>
-  <rect x="845" y="385" width="160" height="28" rx="14" fill="white" opacity="0.14"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop stop-color="#050711"/>
+      <stop offset=".5" stop-color="#08183a"/>
+      <stop offset="1" stop-color="#16072b"/>
+    </linearGradient>
+    <radialGradient id="r" cx=".5" cy=".45" r=".4">
+      <stop stop-color="#22d3ee" stop-opacity=".65"/>
+      <stop offset=".45" stop-color="#8b5cf6" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <rect width="1200" height="630" fill="url(#r)"/>
+  <ellipse cx="840" cy="410" rx="230" ry="70" fill="#22d3ee" opacity=".12"/>
+  <path d="M840 155 C785 170 760 225 760 285 C760 370 805 430 840 430 C875 430 920 370 920 285 C920 225 895 170 840 155Z" fill="#f7c66b"/>
+  <text x="88" y="225" fill="white" font-size="62" font-family="Arial" font-weight="800">Aplikasi Canggih</text>
+  <text x="88" y="300" fill="#67e8f9" font-size="62" font-family="Arial" font-weight="800">Lahir Dari Ide</text>
+  <text x="92" y="370" fill="#aab6ce" font-size="28" font-family="Arial">Animasi telur jatuh, retak, pecah, lalu keluar dashboard modern.</text>
 </svg>
