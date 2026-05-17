@@ -4,220 +4,182 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Jasa Pembuatan Aplikasi Sederhana</title>
-  <meta name="description" content="Jasa pembuatan aplikasi sederhana, modern, rapi, dan sesuai kebutuhan usaha." />
-  <meta name="theme-color" content="#050816" />
-
-  <meta property="og:title" content="Jasa Pembuatan Aplikasi Modern" />
-  <meta property="og:description" content="Aplikasi laporan, absensi, stok, kasir, rekap data, dan sistem UMKM." />
+  <title>Jasa Pembuatan Aplikasi Modern</title>
+  <meta name="description" content="Jasa pembuatan aplikasi sederhana, modern, profesional, dan sesuai kebutuhan bisnis." />
+  <meta property="og:title" content="Aplikasi Canggih Untuk Bisnis Hebat" />
+  <meta property="og:description" content="Website iklan jasa pembuatan aplikasi dengan animasi telur jatuh, retak, pecah, lalu keluar aplikasi canggih." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/preview.svg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="life.css" />
+  <link rel="stylesheet" href="egg-animation.css" />
 </head>
+
 <body>
-  <div class="loader" id="loader">
-    <div class="loader-ring"></div>
-    <p>Memuat pengalaman premium...</p>
-  </div>
+  <canvas id="space"></canvas>
 
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
-  <div class="cursor-glow" id="cursorGlow"></div>
-  <div class="ambient ambient-1"></div>
-  <div class="ambient ambient-2"></div>
-  <div class="ambient ambient-3"></div>
+  <div class="cursor-glow"></div>
 
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Beranda">
-      <span class="brand-mark">A</span>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-mark"></span>
       <span>Aplikasi<span>Custom</span></span>
     </a>
 
-    <nav class="main-nav" aria-label="Navigasi utama">
+    <nav class="menu">
       <a href="#fitur">Fitur</a>
-      <a href="#paket">Paket</a>
-      <a href="#proses">Proses</a>
+      <a href="#harga">Harga</a>
       <a href="#kontak">Kontak</a>
     </nav>
 
-    <a class="header-cta" href="https://wa.me/6281234567890" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="nav-cta" href="https://wa.me/6281234567890">WhatsApp</a>
   </header>
 
-  <main id="home">
-    <section class="hero section-shell">
-      <div class="hero-copy reveal">
-        <div class="eyebrow">
-          <span></span>
-          Jasa aplikasi sederhana untuk usaha
-        </div>
+  <main class="hero">
+    <section class="copy">
+      <div class="eyebrow">JASA PEMBUATAN APLIKASI</div>
 
-        <h1>
-          Sistem usaha yang <span>rapi, modern,</span> dan mudah dipakai.
-        </h1>
+      <h1>
+        Dari ide kecil,<br />
+        lahir <span>aplikasi canggih</span>.
+      </h1>
 
-        <p class="hero-desc">
-          Buat aplikasi sesuai kebutuhan: laporan harian, absensi, stok barang,
-          kasir sederhana, konsinyasi, rekap pembayaran, dan dashboard usaha.
-        </p>
+      <p>
+        Website ini dibuat dengan animasi hidup: telur jatuh dari langit,
+        memantul, retak, pecah, lalu menampilkan sistem aplikasi modern
+        untuk bisnis, UMKM, laporan, absensi, dan rekap data.
+      </p>
 
-        <div class="hero-actions">
-          <a class="btn btn-primary magnetic" href="https://wa.me/6281234567890" target="_blank" rel="noopener">
-            Konsultasi Sekarang
-          </a>
-          <a class="btn btn-ghost magnetic" href="#fitur">Lihat Demo Tampilan</a>
-        </div>
-
-        <div class="trust-row">
-          <div><b>Custom</b><small>Sesuai kebutuhan</small></div>
-          <div><b>Mobile</b><small>Nyaman di HP</small></div>
-          <div><b>Rapi</b><small>Data tertata</small></div>
-        </div>
+      <div class="hero-actions">
+        <a class="btn primary magnetic" href="https://wa.me/6281234567890">Konsultasi Sekarang</a>
+        <a class="btn ghost magnetic" href="#demo">Lihat Demo</a>
       </div>
 
-      <div class="hero-visual reveal delay-1">
-        <div class="holo-card card-tilt">
-          <div class="holo-topbar">
-            <span></span><span></span><span></span>
-            <p>Dashboard Live</p>
-          </div>
-
-          <div class="dashboard-grid">
-            <div class="metric big">
-              <small>Total Hari Ini</small>
-              <strong>Rp 3.480.000</strong>
-              <em>+18% dari kemarin</em>
-            </div>
-            <div class="metric">
-              <small>Transaksi</small>
-              <strong>64</strong>
-            </div>
-            <div class="metric">
-              <small>Barang Aktif</small>
-              <strong>128</strong>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <div class="chart-line"></div>
-            <div class="chart-bars">
-              <i style="height:45%"></i><i style="height:62%"></i><i style="height:38%"></i><i style="height:78%"></i><i style="height:55%"></i><i style="height:88%"></i><i style="height:70%"></i>
-            </div>
-          </div>
-
-          <div class="list-card">
-            <div><span class="dot green"></span><p>Absensi masuk</p><b>32</b></div>
-            <div><span class="dot blue"></span><p>Laporan siap</p><b>PDF</b></div>
-            <div><span class="dot violet"></span><p>Rekap pembayaran</p><b>OK</b></div>
-          </div>
-        </div>
-
-        <div class="floating-chip chip-1">Realtime UI</div>
-        <div class="floating-chip chip-2">Data Rapi</div>
-        <div class="floating-chip chip-3">Mobile Ready</div>
+      <div class="trust">
+        <div><b>Custom</b><small>Sesuai kebutuhan</small></div>
+        <div><b>Modern</b><small>Tampilan HP</small></div>
+        <div><b>Rapi</b><small>Laporan jelas</small></div>
       </div>
     </section>
 
-    <section class="section-shell showcase" id="fitur">
-      <div class="section-heading reveal">
-        <span>Fitur Utama</span>
-        <h2>Tampilan serius, bukan template asal-asalan.</h2>
-        <p>Struktur dibuat agar terlihat lebih premium ketika dibuka dari HP maupun laptop.</p>
-      </div>
+    <section class="stage" id="demo" aria-label="Animasi telur menjadi aplikasi">
+      <div class="sky-beam"></div>
+      <div class="impact-ring"></div>
+      <div class="shadow"></div>
 
-      <div class="feature-grid">
-        <article class="feature-card reveal card-tilt">
-          <div class="icon">📋</div>
-          <h3>Input Data</h3>
-          <p>Form untuk barang, pelanggan, absensi, transaksi, laporan, atau data harian.</p>
-        </article>
-        <article class="feature-card reveal delay-1 card-tilt">
-          <div class="icon">📊</div>
-          <h3>Rekap Otomatis</h3>
-          <p>Ringkasan harian, mingguan, bulanan, total uang, dan laporan usaha.</p>
-        </article>
-        <article class="feature-card reveal delay-2 card-tilt">
-          <div class="icon">📱</div>
-          <h3>Nyaman di HP</h3>
-          <p>Layout responsif supaya mudah dipakai admin, pegawai, atau pemilik usaha.</p>
-        </article>
-        <article class="feature-card reveal card-tilt">
-          <div class="icon">🔐</div>
-          <h3>Login Admin</h3>
-          <p>Bisa ditambah login, role, dan pembatasan halaman sesuai kebutuhan.</p>
-        </article>
-        <article class="feature-card reveal delay-1 card-tilt">
-          <div class="icon">☁️</div>
-          <h3>Database Online</h3>
-          <p>Bisa disambungkan ke Firebase atau spreadsheet bila sistem butuh penyimpanan.</p>
-        </article>
-        <article class="feature-card reveal delay-2 card-tilt">
-          <div class="icon">✨</div>
-          <h3>Desain Custom</h3>
-          <p>Warna, tulisan, fitur, dan alur aplikasi bisa disesuaikan dengan kebutuhan.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section-shell split" id="paket">
-      <div class="premium-panel reveal">
-        <span class="panel-label">Estimasi Layanan</span>
-        <h2>Mulai dari aplikasi sederhana sampai sistem usaha.</h2>
-        <p>Harga menyesuaikan tingkat kesulitan, jumlah halaman, database, login, dan fitur laporan.</p>
-      </div>
-
-      <div class="price-stack reveal delay-1">
-        <div class="price-card active card-tilt">
-          <small>Paket Simple</small>
-          <h3>Landing / Form</h3>
-          <p>Cocok untuk promosi, input data ringan, atau halaman usaha.</p>
+      <div class="egg-scene">
+        <div class="egg" id="egg">
+          <div class="egg-shine"></div>
+          <span class="crack c1"></span>
+          <span class="crack c2"></span>
+          <span class="crack c3"></span>
+          <span class="crack c4"></span>
         </div>
-        <div class="price-card card-tilt">
-          <small>Paket Usaha</small>
-          <h3>Dashboard + Rekap</h3>
-          <p>Cocok untuk laporan harian, stok barang, kasir, dan data pelanggan.</p>
+
+        <div class="shell shell-left"></div>
+        <div class="shell shell-right"></div>
+        <div class="shell shell-top"></div>
+
+        <div class="core-light"></div>
+
+        <div class="app-system">
+          <div class="device main-device">
+            <div class="device-top">
+              <span></span><span></span><span></span>
+              <b>Dashboard Pro</b>
+            </div>
+
+            <div class="kpi-grid">
+              <div class="kpi"><small>Penjualan</small><b>Rp 25.400.000</b></div>
+              <div class="kpi"><small>Order</small><b>1.284</b></div>
+              <div class="kpi"><small>Growth</small><b>+42%</b></div>
+            </div>
+
+            <div class="chart">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+              <svg viewBox="0 0 420 130" preserveAspectRatio="none">
+                <path d="M0 95 C45 70, 70 88, 110 58 C150 28, 185 82, 230 45 C285 -2, 300 100, 350 48 C385 20, 405 45, 420 24" />
+              </svg>
+            </div>
+
+            <div class="rows">
+              <div><span>Absensi pegawai</span><b>Aktif</b></div>
+              <div><span>Stok barang</span><b>128 item</b></div>
+              <div><span>Laporan harian</span><b>Siap</b></div>
+            </div>
+          </div>
+
+          <div class="mini-card card-a">
+            <b>📊 Rekap Otomatis</b>
+            <span>Data masuk langsung rapi</span>
+          </div>
+
+          <div class="mini-card card-b">
+            <b>🔐 Aman</b>
+            <span>Login dan akses admin</span>
+          </div>
+
+          <div class="mini-card card-c">
+            <b>📱 Mobile</b>
+            <span>Nyaman dipakai di HP</span>
+          </div>
         </div>
-        <div class="price-card card-tilt">
-          <small>Paket Custom</small>
-          <h3>Sesuai Kebutuhan</h3>
-          <p>Alur dibuat mengikuti pekerjaan antum agar lebih mudah digunakan.</p>
+
+        <div class="particles-burst">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
-    </section>
 
-    <section class="section-shell process" id="proses">
-      <div class="section-heading reveal">
-        <span>Proses Pembuatan</span>
-        <h2>Alur jelas dari awal sampai jadi.</h2>
-      </div>
-
-      <div class="timeline">
-        <div class="step reveal"><b>01</b><h3>Ceritakan kebutuhan</h3><p>Sampaikan ingin aplikasi untuk apa dan data apa saja yang dibutuhkan.</p></div>
-        <div class="step reveal delay-1"><b>02</b><h3>Rancang alur</h3><p>Ditentukan halaman, tombol, form, laporan, dan penyimpanan data.</p></div>
-        <div class="step reveal delay-2"><b>03</b><h3>Pembuatan</h3><p>Aplikasi dibuat, dites, lalu diperbaiki bila ada bagian yang kurang pas.</p></div>
-        <div class="step reveal delay-3"><b>04</b><h3>Siap dipakai</h3><p>File bisa dipasang di GitHub Pages, Vercel, atau hosting lain.</p></div>
-      </div>
-    </section>
-
-    <section class="section-shell final-cta reveal" id="kontak">
-      <div>
-        <span>Siap dibuatkan?</span>
-        <h2>Konsultasikan kebutuhan aplikasi antum sekarang.</h2>
-        <p>Tidak perlu langsung paham teknis. Cukup jelaskan alur kerja yang ingin dipermudah.</p>
-      </div>
-      <a class="btn btn-primary magnetic" href="https://wa.me/6281234567890" target="_blank" rel="noopener">Chat WhatsApp</a>
+      <button class="replay magnetic" id="replay">Ulangi Animasi</button>
     </section>
   </main>
 
-  <footer>
-    <p>© 2026 AplikasiCustom. Dibuat untuk promosi jasa aplikasi sederhana.</p>
+  <section class="section" id="fitur">
+    <div class="section-title">
+      <span>FITUR</span>
+      <h2>Sistem sederhana, rasa aplikasi premium.</h2>
+    </div>
+
+    <div class="features">
+      <article>
+        <strong>01</strong>
+        <h3>Input Data</h3>
+        <p>Form untuk barang, absensi, pelanggan, pemasukan, pengeluaran, dan laporan harian.</p>
+      </article>
+
+      <article>
+        <strong>02</strong>
+        <h3>Dashboard</h3>
+        <p>Ringkasan data dibuat lebih mudah dibaca dengan tampilan modern dan profesional.</p>
+      </article>
+
+      <article>
+        <strong>03</strong>
+        <h3>Rekap Laporan</h3>
+        <p>Data bisa dibuat rapi untuk laporan harian, mingguan, bulanan, atau kebutuhan usaha.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="pricing" id="harga">
+    <div>
+      <span class="eyebrow">HARGA FLEKSIBEL</span>
+      <h2>Mulai dari aplikasi sederhana sampai sistem custom.</h2>
+      <p>Harga menyesuaikan tingkat kesulitan, jumlah halaman, database, login, dan fitur khusus.</p>
+    </div>
+
+    <a class="btn primary magnetic" href="https://wa.me/6281234567890">Tanya Kebutuhan Saya</a>
+  </section>
+
+  <footer id="kontak">
+    <p>© 2026 AplikasiCustom. Dibuat untuk iklan jasa aplikasi modern.</p>
+    <a href="https://wa.me/6281234567890">Hubungi WhatsApp</a>
   </footer>
 
   <script src="particles.js"></script>
+  <script src="egg-animation.js"></script>
   <script src="app.js"></script>
-  <script src="living-effects.js"></script>
 </body>
 </html>

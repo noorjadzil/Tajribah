@@ -1,19 +1,29 @@
-Paket Website Jasa Aplikasi - Versi Animasi Hidup
+CARA PAKAI DI GITHUB PAGES
 
-Cara pakai:
-1. Upload semua file dan folder ini ke repository GitHub.
-2. Aktifkan GitHub Pages.
-3. Ganti semua nomor 6281234567890 di index.html menjadi nomor WhatsApp antum.
+1. Upload semua file ini ke repository GitHub.
+2. Pastikan file index.html ada di root utama, bukan di dalam folder lain.
+3. Buka Settings > Pages.
+4. Source pilih Deploy from branch.
+5. Branch pilih main, folder /root.
+6. Simpan.
 
-File utama:
-- index.html = struktur halaman
-- style.css = desain utama
-- particles.js = partikel background
-- app.js = reveal, tilt, loader, magnetic button
-- life.css = animasi tambahan premium
-- living-effects.js = efek hidup tambahan: intro cinematic, aurora, orbit, typing text, ripple, counter, glare
-- assets/preview.svg = gambar preview share
+GANTI NOMOR WHATSAPP:
+Cari semua:
+6281234567890
 
-Catatan:
-Versi ini tetap gratis dan bisa jalan di GitHub Pages tanpa Firebase.
-Firebase hanya dibutuhkan kalau ingin database/login/penyimpanan data.
+Ganti dengan nomor WhatsApp antum.
+Contoh Indonesia:
+62812xxxxxxxx
+
+FILE UTAMA:
+- index.html
+- style.css
+- egg-animation.css
+- particles.js
+- egg-animation.js
+- app.js
+- assets/preview.svg
+
+CATATAN:
+Animasi ini tidak butuh Firebase.
+Firebase hanya untuk database/login, bukan untuk memperbagus animasi.

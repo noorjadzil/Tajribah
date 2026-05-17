@@ -1,62 +1,80 @@
-const loader = document.getElementById('loader');
-const cursorGlow = document.getElementById('cursorGlow');
+const glow = document.querySelector(".cursor-glow");
 
-window.addEventListener('load', () => {
-  setTimeout(() => loader.classList.add('hide'), 450);
+window.addEventListener("pointermove", (e) => {
+  if(glow){
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  }
+
+  const x = (e.clientX / innerWidth - .5) * 2;
+  const y = (e.clientY / innerHeight - .5) * 2;
+  document.documentElement.style.setProperty("--mx", x.toFixed(3));
+  document.documentElement.style.setProperty("--my", y.toFixed(3));
 });
 
-window.addEventListener('mousemove', (event) => {
-  if (!cursorGlow) return;
-  cursorGlow.style.left = event.clientX + 'px';
-  cursorGlow.style.top = event.clientY + 'px';
+document.querySelectorAll(".magnetic").forEach(el => {
+  el.addEventListener("pointermove", e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    el.style.transform = `translate(${x * .14}px, ${y * .18}px) scale(1.02)`;
+  });
+
+  el.addEventListener("pointerleave", () => {
+    el.style.transform = "";
+  });
+
+  el.addEventListener("click", e => {
+    const ripple = document.createElement("span");
+    const rect = el.getBoundingClientRect();
+    ripple.style.cssText = `
+      position:absolute;
+      left:${e.clientX - rect.left}px;
+      top:${e.clientY - rect.top}px;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:rgba(255,255,255,.55);
+      transform:translate(-50%,-50%) scale(0);
+      animation:ripple .65s ease-out forwards;
+      pointer-events:none;
+    `;
+    el.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
+  });
 });
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
+const style = document.createElement("style");
+style.textContent = `
+@keyframes ripple{
+  to{transform:translate(-50%,-50%) scale(28);opacity:0}
+}
+.reveal-in{opacity:1!important;transform:translateY(0)!important}
+`;
+document.head.appendChild(style);
+
+const revealEls = document.querySelectorAll(".features article,.pricing,.section-title");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("reveal-in");
     }
   });
-}, { threshold: 0.16 });
+}, {threshold:.18});
 
-document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
-
-function setTilt(element, event) {
-  const rect = element.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-  const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
-  const rotateX = ((y - centerY) / centerY) * -6;
-  const rotateY = ((x - centerX) / centerX) * 6;
-
-  element.style.transform = `perspective(950px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-}
-
-document.querySelectorAll('.card-tilt').forEach((card) => {
-  card.addEventListener('mousemove', (event) => setTilt(card, event));
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
+revealEls.forEach(el => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(36px)";
+  el.style.transition = "900ms cubic-bezier(.2,.8,.2,1)";
+  observer.observe(el);
 });
 
-document.querySelectorAll('.magnetic').forEach((button) => {
-  button.addEventListener('mousemove', (event) => {
-    const rect = button.getBoundingClientRect();
-    const x = event.clientX - rect.left - rect.width / 2;
-    const y = event.clientY - rect.top - rect.height / 2;
-    button.style.transform = `translate(${x * 0.12}px, ${y * 0.18}px)`;
+document.querySelectorAll(".features article,.device").forEach(card => {
+  card.addEventListener("pointermove", e => {
+    const rect = card.getBoundingClientRect();
+    const rx = ((e.clientY - rect.top) / rect.height - .5) * -9;
+    const ry = ((e.clientX - rect.left) / rect.width - .5) * 9;
+    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-7px)`;
   });
-
-  button.addEventListener('mouseleave', () => {
-    button.style.transform = '';
-  });
-});
-
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  document.querySelectorAll('.ambient').forEach((orb, index) => {
-    orb.style.translate = `0 ${y * (0.04 + index * 0.018)}px`;
-  });
+  card.addEventListener("pointerleave", () => card.style.transform = "");
 });
