@@ -1,551 +1,511 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Input Jajan</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jasa Pembuatan Aplikasi Modern</title>
+
+<!-- PREVIEW WHATSAPP / FACEBOOK -->
+<meta property="og:title" content="Jasa Pembuatan Aplikasi Modern">
+<meta property="og:description" content="Menerima pembuatan aplikasi sederhana, modern, profesional sesuai kebutuhan.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+<meta property="og:url" content="https://username.github.io">
+<meta property="og:type" content="website">
+
+<!-- TWITTER/X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jasa Pembuatan Aplikasi Modern">
+<meta name="twitter:description" content="Aplikasi custom sesuai kebutuhan UMKM, absensi, laporan, kasir dan lainnya.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
 
 <style>
-body{
-font-family:'Segoe UI',Arial;
+*{
 margin:0;
-background:linear-gradient(135deg,#0f172a,#1e3a8a);
-}
-.container{
-max-width:420px;
-margin:auto;
-padding:10px;
-}
-.card{
-background:white;
-border-radius:16px;
-padding:15px;
-box-shadow:0 8px 20px rgba(0,0,0,0.2);
-}
-.tabs{
-display:flex;
-background:#1e3a8a;
-border-radius:12px 12px 0 0;
-overflow:hidden;
-margin-bottom:10px;
-}
-.tab-btn{
-flex:1;
-padding:12px;
-border:none;
-background:transparent;
-color:white;
-font-weight:700;
-}
-.tab-btn.active{
-background:#3b82f6;
-}
-h2{
-text-align:center;
-color:#1e3a8a;
-}
-label{
-font-weight:700;
-font-size:13px;
-margin-top:8px;
-display:block;
-}
-select,input[type="number"],input[type="text"]{
-width:100%;
-padding:10px;
-border-radius:10px;
-border:1px solid #cbd5f5;
-margin-bottom:10px;
-font-weight:600;
+padding:0;
 box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
-input[type="number"]{
-text-align:center;
-font-size:16px;
+
+body{
+background:#f0f2f5;
+color:#1c1e21;
+overflow-x:hidden;
 }
-.row{
+
+.topbar{
+position:sticky;
+top:0;
+z-index:100;
+height:58px;
+background:#fff;
 display:flex;
-justify-content:space-between;
 align-items:center;
-gap:10px;
-border-bottom:1px solid #eee;
-padding:8px 0;
+justify-content:space-between;
+padding:0 18px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
-.row input{
-width:120px;
+
+.logo{
+font-size:34px;
+font-weight:900;
+color:#1877f2;
 }
-button{
-width:100%;
+
+.search{
+background:#f0f2f5;
+padding:11px 18px;
+border-radius:30px;
+color:#65676b;
+width:250px;
+}
+
+.menu{
+display:flex;
+gap:18px;
+font-size:24px;
+color:#65676b;
+}
+
+.layout{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:260px 1fr 300px;
+gap:20px;
+padding:20px 15px;
+}
+
+.sidebar,
+.rightbar,
+.post{
+background:#fff;
+border-radius:14px;
+padding:16px;
+box-shadow:0 1px 3px rgba(0,0,0,.1);
+}
+
+.item{
+padding:13px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.item:hover{
+background:#f0f2f5;
+}
+
+.feed{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.story{
+background:linear-gradient(135deg,#1877f2,#42b72a);
+padding:28px;
+border-radius:18px;
+color:#fff;
+font-size:28px;
+font-weight:900;
+box-shadow:0 10px 30px rgba(24,119,242,.3);
+animation:naik 2s infinite alternate;
+}
+
+@keyframes naik{
+from{transform:translateY(0)}
+to{transform:translateY(-5px)}
+}
+
+.post-head{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:14px;
+}
+
+.avatar{
+width:50px;
+height:50px;
+border-radius:50%;
+background:linear-gradient(135deg,#1877f2,#00d4ff);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+font-weight:bold;
+font-size:22px;
+}
+
+.name{
+font-weight:900;
+}
+
+.time{
+font-size:13px;
+color:#65676b;
+margin-top:3px;
+}
+
+.post-text{
+font-size:17px;
+line-height:1.6;
+margin-bottom:16px;
+}
+
+.hero{
+background:linear-gradient(135deg,#0f172a,#1877f2,#42b72a);
+border-radius:18px;
+padding:35px 25px;
+text-align:center;
+color:#fff;
+position:relative;
+overflow:hidden;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:400px;
+height:400px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+top:-180px;
+right:-180px;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+width:250px;
+height:250px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+bottom:-120px;
+left:-120px;
+}
+
+.marquee{
+white-space:nowrap;
+font-size:22px;
+font-weight:900;
+color:#ffeb3b;
+animation:jalan 12s linear infinite;
+margin-bottom:18px;
+}
+
+@keyframes jalan{
+from{transform:translateX(100%)}
+to{transform:translateX(-100%)}
+}
+
+.big{
+font-size:44px;
+font-weight:900;
+line-height:1.2;
+margin-bottom:20px;
+text-shadow:0 0 20px rgba(255,255,255,.5);
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #fff}
+to{text-shadow:0 0 25px #fff}
+}
+
+.typing{
+font-size:24px;
+font-weight:bold;
+min-height:34px;
+margin-bottom:20px;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-top:18px;
+}
+
+.feature{
+background:rgba(255,255,255,.15);
 padding:14px;
-border:none;
 border-radius:12px;
-background:#1e3a8a;
-color:white;
-font-weight:700;
-margin-top:10px;
+font-weight:bold;
+backdrop-filter:blur(5px);
+transition:.3s;
 }
-img{
-width:100%;
-border-radius:10px;
-margin-top:8px;
+
+.feature:hover{
+transform:scale(1.05);
+background:rgba(255,255,255,.25);
 }
-#catatan{
-width:100%;
-padding:12px;
-margin-top:6px;
-border-radius:10px;
-border:1px solid #cbd5f5;
+
+.actions{
+display:flex;
+justify-content:space-around;
+border-top:1px solid #ddd;
+border-bottom:1px solid #ddd;
+padding:12px 0;
+margin-top:16px;
+font-weight:bold;
+color:#65676b;
+}
+
+.actions div{
+cursor:pointer;
+transition:.3s;
+}
+
+.actions div:hover{
+color:#1877f2;
+transform:scale(1.08);
+}
+
+.cta{
+display:block;
+text-align:center;
+background:#1877f2;
+color:#fff;
+text-decoration:none;
+padding:15px;
+border-radius:12px;
+margin-top:16px;
+font-size:18px;
+font-weight:900;
+transition:.3s;
+box-shadow:0 5px 18px rgba(24,119,242,.3);
+}
+
+.cta:hover{
+background:#0f67d8;
+transform:translateY(-3px);
+}
+
+.comment{
+background:#f0f2f5;
+padding:12px 15px;
+border-radius:20px;
+margin-top:12px;
 font-size:15px;
-font-weight:600;
-box-sizing:border-box;
-resize:none;
+}
+
+.rightbar h3{
+margin:10px 0;
+}
+
+.price{
+font-size:28px;
+font-weight:900;
+color:#42b72a;
+margin:12px 0;
+}
+
+.float{
+position:fixed;
+right:18px;
+bottom:18px;
+width:60px;
+height:60px;
+background:#25d366;
+color:#fff;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+font-size:30px;
+box-shadow:0 5px 20px rgba(0,0,0,.3);
+animation:pulse 1.5s infinite;
+z-index:999;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.12)}
+100%{transform:scale(1)}
+}
+
+@media(max-width:900px){
+.layout{
+grid-template-columns:1fr;
+}
+
+.sidebar,
+.rightbar{
+display:none;
+}
+
+.search{
+width:170px;
+}
+
+.menu{
+display:none;
+}
+
+.big{
+font-size:34px;
+}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<div class="tabs">
-<button class="tab-btn active" onclick="showTab('input',event)">Input</button>
+<div class="topbar">
+<div class="logo">facebook</div>
+<div class="search">🔍 Cari jasa aplikasi...</div>
+<div class="menu">
+<span>🏠</span>
+<span>🎬</span>
+<span>🛒</span>
+<span>👥</span>
+</div>
 </div>
 
-<div class="card">
+<div class="layout">
 
-<div id="inputTab">
-
-<h2>Input Jajan</h2>
-
-<label>Foto</label>
-<input type="file" id="foto" accept="image/*">
-<img id="preview" style="display:none">
-
-<label>Jenis</label>
-<select id="jenis">
-<option value="Masuk">Masuk</option>
-<option value="Sisa">Sisa</option>
-</select>
-
-<label>Metode Input</label>
-<select id="metodeInput" onchange="ubahMetodeInput()">
-<option value="semua">Input Semua</option>
-<option value="dropdown">Pilih Dropdown</option>
-<option value="manual">Input Manual</option>
-<option value="campuran">Campuran</option>
-</select>
-
-<label>Tempat</label>
-<select id="tempat">
-<option>Ikhwan</option>
-<option>Akhwat</option>
-</select>
-<!-- DROPDOWN ATAS 4 BARIS -->
-<div id="dropdownAtas">
-<div class="row"><select id="atas1"><option value="">-- Pilih --</option></select><input type="number" id="atas1_jumlah" placeholder="Jumlah"></div>
-<div class="row"><select id="atas2"><option value="">-- Pilih --</option></select><input type="number" id="atas2_jumlah" placeholder="Jumlah"></div>
-<div class="row"><select id="atas3"><option value="">-- Pilih --</option></select><input type="number" id="atas3_jumlah" placeholder="Jumlah"></div>
-<div class="row"><select id="atas4"><option value="">-- Pilih --</option></select><input type="number" id="atas4_jumlah" placeholder="Jumlah"></div>
+<div class="sidebar">
+<div class="item">🏠 Beranda</div>
+<div class="item">📢 Iklan</div>
+<div class="item">💼 Layanan</div>
+<div class="item">⭐ Testimoni</div>
+<div class="item">📞 Kontak</div>
 </div>
 
-<!-- INPUT ITEM YANG SUDAH ADA -->
-<div id="dynamicItems"></div>
+<main class="feed">
 
-<!-- DROPDOWN TENGAH 2 BARIS -->
-<div id="dropdownTengah">
-<div class="row"><select id="tengah1"><option value="">-- Pilih --</option></select><input type="number" id="tengah1_jumlah" placeholder="Jumlah"></div>
-<div class="row"><select id="tengah2"><option value="">-- Pilih --</option></select><input type="number" id="tengah2_jumlah" placeholder="Jumlah"></div>
+<div class="story">
+🔥 PROMO PEMBUATAN APLIKASI MODERN
 </div>
 
-<!-- DROPDOWN BAWAH 4 BARIS -->
-<div id="dropdownBawah">
-<div class="row"><select id="bawah1"><option value="">-- Pilih --</option></select><input type="number" id="bawah1_jumlah" placeholder="Jumlah"></div>
-<div class="row"><select id="bawah2"><option value="">-- Pilih --</option></select><input type="number" id="bawah2_jumlah" placeholder="Jumlah"></div>
-<div class="row"><select id="bawah3"><option value="">-- Pilih --</option></select><input type="number" id="bawah3_jumlah" placeholder="Jumlah"></div>
-<div class="row"><select id="bawah4"><option value="">-- Pilih --</option></select><input type="number" id="bawah4_jumlah" placeholder="Jumlah"></div>
-</div>
-<!-- INPUT SEMUA -->
-<div id="dynamicItems"></div>
+<div class="post">
 
-<!-- DROPDOWN -->
-<div class="row" id="dropdown1">
-<select id="slot1">
-<option value="">-- Pilih --</option>
-</select>
-<input type="number" id="slot1_jumlah" placeholder="Jumlah">
+<div class="post-head">
+<div class="avatar">A</div>
+
+<div>
+<div class="name">Jasa Aplikasi Modern</div>
+<div class="time">Bersponsor · Baru saja 🌐</div>
+</div>
 </div>
 
-<div class="row" id="dropdown2">
-<select id="slot2">
-<option value="">-- Pilih --</option>
-</select>
-<input type="number" id="slot2_jumlah" placeholder="Jumlah">
+<div class="post-text">
+Butuh aplikasi sederhana untuk usaha, kantin, absensi,
+laporan, kasir, rekap spreadsheet, atau sistem custom lainnya?
+Sekarang bisa dibuat modern dan profesional sesuai kebutuhan.
 </div>
 
-<!-- INPUT MANUAL -->
-<div id="manualArea">
+<div class="hero">
 
-<div class="row">
-<input type="text" id="manual_barang1" placeholder="Nama Barang">
-<input type="number" id="manual_jumlah1" placeholder="Jumlah">
+<div class="marquee">
+🚀 MODERN • PROFESIONAL • CEPAT • SIAP PAKAI • BISA CUSTOM 🚀
 </div>
 
-<div class="row">
-<input type="text" id="manual_barang2" placeholder="Nama Barang">
-<input type="number" id="manual_jumlah2" placeholder="Jumlah">
+<div class="big">
+Aplikasi Custom Sesuai Kebutuhan
 </div>
 
-<div class="row">
-<input type="text" id="manual_barang3" placeholder="Nama Barang">
-<input type="number" id="manual_jumlah3" placeholder="Jumlah">
+<div class="typing" id="typing"></div>
+
+<div class="features">
+<div class="feature">📱 Tampilan HP</div>
+<div class="feature">📊 Rekap Spreadsheet</div>
+<div class="feature">⚡ Cepat & Ringan</div>
+<div class="feature">💎 Modern Premium</div>
 </div>
 
 </div>
 
-<label>Catatan</label>
-<textarea id="catatan"></textarea>
+<div class="actions">
+<div>👍 Suka</div>
+<div>💬 Komentar</div>
+<div>↗️ Bagikan</div>
+</div>
 
-<label>Pilih Kirim ke WA</label>
-<div id="pilihWA"></div>
+<a class="cta" href="https://wa.me/6281234567890">
+Hubungi WhatsApp Sekarang
+</a>
 
-<button onclick="kirim()">💾 Simpan</button>
-<button onclick="location.href='laporan.html'">📊 Lihat Laporan</button>
-<button onclick="location.href='setting.html'">⚙️ Setting</button>
+<div class="comment">
+<b>Calon Pelanggan:</b>
+MasyaAllah tampilannya keren, bisa request fitur?
+</div>
+
+<div class="comment">
+<b>Admin:</b>
+Bisa insyaAllah sesuai kebutuhan dan tingkat kesulitan.
+</div>
 
 </div>
+
+</main>
+
+<div class="rightbar">
+
+<div style="color:#65676b;font-size:13px">
+Bersponsor
 </div>
+
+<h3>Jasa Pembuatan Aplikasi</h3>
+
+<div class="price">
+50k - 300k
 </div>
+
+<p style="line-height:1.6;color:#555">
+Cocok untuk UMKM, sekolah, kantin,
+laporan, absensi, dan kebutuhan lainnya.
+</p>
+
+</div>
+
+</div>
+
+<a class="float" href="https://wa.me/6281234567890">
+☎
+</a>
 
 <script>
-
-// FORMAT TANGGAL
-function formatTanggal(){
-let hari=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
-let bulan=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-let d=new Date();
-return `${hari[d.getDay()]}, ${d.getDate()} ${bulan[d.getMonth()]}`;
-}
-
-// UBAH METODE
-function ubahMetodeInput(){
-
-let metode=document.getElementById("metodeInput").value;
-
-let dynamic=document.getElementById("dynamicItems");
-let dropdown1=document.getElementById("dropdown1");
-let dropdown2=document.getElementById("dropdown2");
-let manual=document.getElementById("manualArea");
-
-if(metode==="semua"){
-dynamic.style.display="block";
-dropdown1.style.display="none";
-dropdown2.style.display="none";
-manual.style.display="none";
-}
-
-if(metode==="dropdown"){
-dynamic.style.display="none";
-dropdown1.style.display="flex";
-dropdown2.style.display="flex";
-manual.style.display="none";
-}
-
-if(metode==="manual"){
-dynamic.style.display="none";
-dropdown1.style.display="none";
-dropdown2.style.display="none";
-manual.style.display="block";
-}
-
-if(metode==="campuran"){
-dynamic.style.display="block";
-dropdown1.style.display="flex";
-dropdown2.style.display="flex";
-manual.style.display="block";
-}
-
-}
-
-// LOAD ITEM
-function loadItems(){
-let container=document.getElementById("dynamicItems");
-container.innerHTML="";
-
-db.ref("items").once("value",snap=>{
-snap.forEach(c=>{
-
-let data=c.val();
-let nama=data.nama || data;
-
-let div=document.createElement("div");
-div.className="row";
-
-div.innerHTML=`
-<span>${nama}</span>
-<input type="number" data-nama="${nama}">
-`;
-
-container.appendChild(div);
-
-});
-});
-}
-
-// DROPDOWN
-function loadDropdownItems(){
-
-let ids=[
-"atas1","atas2","atas3","atas4",
-"tengah1","tengah2",
-"bawah1","bawah2","bawah3","bawah4"
+const teks = [
+"Modern dan profesional.",
+"Bisa rekap spreadsheet.",
+"Cocok untuk UMKM dan kantin.",
+"Tampilan premium seperti aplikasi besar.",
+"Siap menyesuaikan kebutuhan."
 ];
 
-ids.forEach(id=>{
-document.getElementById(id).innerHTML='<option value="">-- Pilih --</option>';
-});
+let i = 0;
+let j = 0;
+let hapus = false;
 
-db.ref("items").once("value",snap=>{
-snap.forEach(c=>{
-let data=c.val();
-let nama=data.nama || data;
+const el = document.getElementById("typing");
 
-ids.forEach(id=>{
-let opt=document.createElement("option");
-opt.value=nama;
-opt.textContent=nama;
-document.getElementById(id).appendChild(opt);
-});
+function ketik(){
 
-});
-});
+let kalimat = teks[i];
+
+if(!hapus){
+el.textContent = kalimat.substring(0,j++);
+if(j > kalimat.length){
+hapus = true;
+setTimeout(ketik,1200);
+return;
+}
+}else{
+el.textContent = kalimat.substring(0,j--);
+if(j < 0){
+hapus = false;
+i = (i + 1) % teks.length;
+}
 }
 
-// LOAD WA
-function loadWAOptions(){
-
-let container=document.getElementById("pilihWA");
-container.innerHTML="Loading...";
-
-db.ref("config/wa").once("value",snap=>{
-
-let wa=snap.val() || {};
-container.innerHTML="";
-
-for(let i=1;i<=4;i++){
-
-if(wa["wa"+i]){
-
-let div=document.createElement("div");
-div.className="row";
-
-div.innerHTML=`
-<label>
-<input type="radio" name="wa" value="${wa["wa"+i]}">
-${wa["wa"+i]}
-</label>
-`;
-
-container.appendChild(div);
-
+setTimeout(ketik,hapus ? 40 : 80);
 }
 
-}
-
-if(container.innerHTML===""){
-container.innerHTML="Belum ada nomor WA";
-}
-
-});
-}
-
-// SIMPAN
-async function kirim(){
-
-let items=[];
-
-// INPUT SEMUA
-document.querySelectorAll("#dynamicItems input").forEach(input=>{
-
-let val=input.value;
-
-if(val && val!=0){
-
-items.push({
-barang:input.dataset.nama,
-jumlah:Number(val)
-});
-
-}
-
-});
-
-// DROPDOWN
-function tambahSlot(idBarang,idJumlah){
-
-let barang=document.getElementById(idBarang).value;
-let jumlah=document.getElementById(idJumlah).value;
-
-if(barang && jumlah && jumlah!=0){
-items.push({
-barang:barang,
-jumlah:Number(jumlah)
-});
-}
-
-}
-
-[
-["atas1","atas1_jumlah"],
-["atas2","atas2_jumlah"],
-["atas3","atas3_jumlah"],
-["atas4","atas4_jumlah"],
-["tengah1","tengah1_jumlah"],
-["tengah2","tengah2_jumlah"],
-["bawah1","bawah1_jumlah"],
-["bawah2","bawah2_jumlah"],
-["bawah3","bawah3_jumlah"],
-["bawah4","bawah4_jumlah"]
-].forEach(s=>{
-tambahSlot(s[0],s[1]);
-});
-// MANUAL
-for(let i=1;i<=3;i++){
-
-let barang=document.getElementById("manual_barang"+i).value;
-let jumlah=document.getElementById("manual_jumlah"+i).value;
-
-if(barang && jumlah && jumlah!=0){
-
-items.push({
-barang:barang,
-jumlah:Number(jumlah)
-});
-
-}
-
-}
-
-// FOTO
-let fotoBase64="";
-let f=document.getElementById("foto").files[0];
-
-if(f){
-fotoBase64=await kompresGambar(f);
-}
-
-// DATA
-let data={
-waktu:new Date().toISOString(),
-tempat:document.getElementById("tempat").value,
-jenis:document.getElementById("jenis").value,
-items:items,
-catatan:document.getElementById("catatan").value,
-foto:fotoBase64
-};
-
-await db.ref("jajan").push(data);
-
-// WA
-let selected=document.querySelector('input[name="wa"]:checked');
-
-if(selected){
-
-let teks=formatTanggal()+"\n";
-teks += `${data.jenis} - ${data.tempat}\n\n`;
-
-data.items.forEach(i=>{
-teks += `${i.barang} ${i.jumlah}\n`;
-});
-
-let url=`https://wa.me/${selected.value}?text=${encodeURIComponent(teks)}`;
-window.open(url,"_blank");
-
-}
-
-alert("Berhasil disimpan");
-location.reload();
-
-}
-
-// KOMPRES
-function kompresGambar(file){
-
-return new Promise(resolve=>{
-
-let reader=new FileReader();
-
-reader.onload=e=>{
-
-let img=new Image();
-img.src=e.target.result;
-
-img.onload=()=>{
-
-let canvas=document.createElement("canvas");
-
-let scale=400/img.width;
-
-canvas.width=400;
-canvas.height=img.height*scale;
-
-let ctx=canvas.getContext("2d");
-
-ctx.drawImage(img,0,0,canvas.width,canvas.height);
-
-resolve(canvas.toDataURL("image/jpeg",0.5));
-
-};
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-</script>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
-<script>
-
-firebase.initializeApp({
-databaseURL:"https://maqshof-d5772-default-rtdb.asia-southeast1.firebasedatabase.app"
-});
-
-const db=firebase.database();
-
-window.onload=function(){
-
-loadItems();
-loadDropdownItems();
-loadWAOptions();
-ubahMetodeInput();
-
-}
-
-// CONFIG
-db.ref("config").once("value",snap=>{
-
-let c=snap.val();
-
-if(!c) return;
-
-if(c.label){
-document.querySelector("h2").innerText="Input "+c.label;
-}
-
-if(c.theme){
-
-document.body.style.background=
-`linear-gradient(135deg,${c.theme.bg},${c.theme.primary})`;
-
-}
-
-});
-
+ketik();
 </script>
 
 </body>
