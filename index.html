@@ -1,514 +1,221 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Jasa Pembuatan Aplikasi Modern</title>
+  <title>Jasa Pembuatan Aplikasi Sederhana</title>
+  <meta name="description" content="Jasa pembuatan aplikasi sederhana, modern, rapi, dan sesuai kebutuhan usaha." />
+  <meta name="theme-color" content="#050816" />
 
-<!-- PREVIEW WHATSAPP / FACEBOOK -->
-<meta property="og:title" content="Jasa Pembuatan Aplikasi Modern">
-<meta property="og:description" content="Menerima pembuatan aplikasi sederhana, modern, profesional sesuai kebutuhan.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
-<meta property="og:url" content="https://username.github.io">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="Jasa Pembuatan Aplikasi Modern" />
+  <meta property="og:description" content="Aplikasi laporan, absensi, stok, kasir, rekap data, dan sistem UMKM." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/preview.svg" />
 
-<!-- TWITTER/X -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Jasa Pembuatan Aplikasi Modern">
-<meta name="twitter:description" content="Aplikasi custom sesuai kebutuhan UMKM, absensi, laporan, kasir dan lainnya.">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#f0f2f5;
-color:#1c1e21;
-overflow-x:hidden;
-}
-
-.topbar{
-position:sticky;
-top:0;
-z-index:100;
-height:58px;
-background:#fff;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 18px;
-box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-.logo{
-font-size:34px;
-font-weight:900;
-color:#1877f2;
-}
-
-.search{
-background:#f0f2f5;
-padding:11px 18px;
-border-radius:30px;
-color:#65676b;
-width:250px;
-}
-
-.menu{
-display:flex;
-gap:18px;
-font-size:24px;
-color:#65676b;
-}
-
-.layout{
-max-width:1200px;
-margin:auto;
-display:grid;
-grid-template-columns:260px 1fr 300px;
-gap:20px;
-padding:20px 15px;
-}
-
-.sidebar,
-.rightbar,
-.post{
-background:#fff;
-border-radius:14px;
-padding:16px;
-box-shadow:0 1px 3px rgba(0,0,0,.1);
-}
-
-.item{
-padding:13px;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.item:hover{
-background:#f0f2f5;
-}
-
-.feed{
-display:flex;
-flex-direction:column;
-gap:18px;
-}
-
-.story{
-background:linear-gradient(135deg,#1877f2,#42b72a);
-padding:28px;
-border-radius:18px;
-color:#fff;
-font-size:28px;
-font-weight:900;
-box-shadow:0 10px 30px rgba(24,119,242,.3);
-animation:naik 2s infinite alternate;
-}
-
-@keyframes naik{
-from{transform:translateY(0)}
-to{transform:translateY(-5px)}
-}
-
-.post-head{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:14px;
-}
-
-.avatar{
-width:50px;
-height:50px;
-border-radius:50%;
-background:linear-gradient(135deg,#1877f2,#00d4ff);
-display:flex;
-align-items:center;
-justify-content:center;
-color:#fff;
-font-weight:bold;
-font-size:22px;
-}
-
-.name{
-font-weight:900;
-}
-
-.time{
-font-size:13px;
-color:#65676b;
-margin-top:3px;
-}
-
-.post-text{
-font-size:17px;
-line-height:1.6;
-margin-bottom:16px;
-}
-
-.hero{
-background:linear-gradient(135deg,#0f172a,#1877f2,#42b72a);
-border-radius:18px;
-padding:35px 25px;
-text-align:center;
-color:#fff;
-position:relative;
-overflow:hidden;
-}
-
-.hero::before{
-content:"";
-position:absolute;
-width:400px;
-height:400px;
-background:rgba(255,255,255,.08);
-border-radius:50%;
-top:-180px;
-right:-180px;
-}
-
-.hero::after{
-content:"";
-position:absolute;
-width:250px;
-height:250px;
-background:rgba(255,255,255,.08);
-border-radius:50%;
-bottom:-120px;
-left:-120px;
-}
-
-.marquee{
-white-space:nowrap;
-font-size:22px;
-font-weight:900;
-color:#ffeb3b;
-animation:jalan 12s linear infinite;
-margin-bottom:18px;
-}
-
-@keyframes jalan{
-from{transform:translateX(100%)}
-to{transform:translateX(-100%)}
-}
-
-.big{
-font-size:44px;
-font-weight:900;
-line-height:1.2;
-margin-bottom:20px;
-text-shadow:0 0 20px rgba(255,255,255,.5);
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{text-shadow:0 0 10px #fff}
-to{text-shadow:0 0 25px #fff}
-}
-
-.typing{
-font-size:24px;
-font-weight:bold;
-min-height:34px;
-margin-bottom:20px;
-}
-
-.features{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-margin-top:18px;
-}
-
-.feature{
-background:rgba(255,255,255,.15);
-padding:14px;
-border-radius:12px;
-font-weight:bold;
-backdrop-filter:blur(5px);
-transition:.3s;
-}
-
-.feature:hover{
-transform:scale(1.05);
-background:rgba(255,255,255,.25);
-}
-
-.actions{
-display:flex;
-justify-content:space-around;
-border-top:1px solid #ddd;
-border-bottom:1px solid #ddd;
-padding:12px 0;
-margin-top:16px;
-font-weight:bold;
-color:#65676b;
-}
-
-.actions div{
-cursor:pointer;
-transition:.3s;
-}
-
-.actions div:hover{
-color:#1877f2;
-transform:scale(1.08);
-}
-
-.cta{
-display:block;
-text-align:center;
-background:#1877f2;
-color:#fff;
-text-decoration:none;
-padding:15px;
-border-radius:12px;
-margin-top:16px;
-font-size:18px;
-font-weight:900;
-transition:.3s;
-box-shadow:0 5px 18px rgba(24,119,242,.3);
-}
-
-.cta:hover{
-background:#0f67d8;
-transform:translateY(-3px);
-}
-
-.comment{
-background:#f0f2f5;
-padding:12px 15px;
-border-radius:20px;
-margin-top:12px;
-font-size:15px;
-}
-
-.rightbar h3{
-margin:10px 0;
-}
-
-.price{
-font-size:28px;
-font-weight:900;
-color:#42b72a;
-margin:12px 0;
-}
-
-.float{
-position:fixed;
-right:18px;
-bottom:18px;
-width:60px;
-height:60px;
-background:#25d366;
-color:#fff;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-text-decoration:none;
-font-size:30px;
-box-shadow:0 5px 20px rgba(0,0,0,.3);
-animation:pulse 1.5s infinite;
-z-index:999;
-}
-
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.12)}
-100%{transform:scale(1)}
-}
-
-@media(max-width:900px){
-.layout{
-grid-template-columns:1fr;
-}
-
-.sidebar,
-.rightbar{
-display:none;
-}
-
-.search{
-width:170px;
-}
-
-.menu{
-display:none;
-}
-
-.big{
-font-size:34px;
-}
-}
-</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div class="loader" id="loader">
+    <div class="loader-ring"></div>
+    <p>Memuat pengalaman premium...</p>
+  </div>
 
-<div class="topbar">
-<div class="logo">facebook</div>
-<div class="search">🔍 Cari jasa aplikasi...</div>
-<div class="menu">
-<span>🏠</span>
-<span>🎬</span>
-<span>🛒</span>
-<span>👥</span>
-</div>
-</div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+  <div class="ambient ambient-3"></div>
 
-<div class="layout">
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Beranda">
+      <span class="brand-mark">A</span>
+      <span>Aplikasi<span>Custom</span></span>
+    </a>
 
-<div class="sidebar">
-<div class="item">🏠 Beranda</div>
-<div class="item">📢 Iklan</div>
-<div class="item">💼 Layanan</div>
-<div class="item">⭐ Testimoni</div>
-<div class="item">📞 Kontak</div>
-</div>
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a href="#fitur">Fitur</a>
+      <a href="#paket">Paket</a>
+      <a href="#proses">Proses</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
 
-<main class="feed">
+    <a class="header-cta" href="https://wa.me/6281234567890" target="_blank" rel="noopener">WhatsApp</a>
+  </header>
 
-<div class="story">
-🔥 PROMO PEMBUATAN APLIKASI MODERN
-</div>
+  <main id="home">
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">
+          <span></span>
+          Jasa aplikasi sederhana untuk usaha
+        </div>
 
-<div class="post">
+        <h1>
+          Sistem usaha yang <span>rapi, modern,</span> dan mudah dipakai.
+        </h1>
 
-<div class="post-head">
-<div class="avatar">A</div>
+        <p class="hero-desc">
+          Buat aplikasi sesuai kebutuhan: laporan harian, absensi, stok barang,
+          kasir sederhana, konsinyasi, rekap pembayaran, dan dashboard usaha.
+        </p>
 
-<div>
-<div class="name">Jasa Aplikasi Modern</div>
-<div class="time">Bersponsor · Baru saja 🌐</div>
-</div>
-</div>
+        <div class="hero-actions">
+          <a class="btn btn-primary magnetic" href="https://wa.me/6281234567890" target="_blank" rel="noopener">
+            Konsultasi Sekarang
+          </a>
+          <a class="btn btn-ghost magnetic" href="#fitur">Lihat Demo Tampilan</a>
+        </div>
 
-<div class="post-text">
-Butuh aplikasi sederhana untuk usaha, kantin, absensi,
-laporan, kasir, rekap spreadsheet, atau sistem custom lainnya?
-Sekarang bisa dibuat modern dan profesional sesuai kebutuhan.
-</div>
+        <div class="trust-row">
+          <div><b>Custom</b><small>Sesuai kebutuhan</small></div>
+          <div><b>Mobile</b><small>Nyaman di HP</small></div>
+          <div><b>Rapi</b><small>Data tertata</small></div>
+        </div>
+      </div>
 
-<div class="hero">
+      <div class="hero-visual reveal delay-1">
+        <div class="holo-card card-tilt">
+          <div class="holo-topbar">
+            <span></span><span></span><span></span>
+            <p>Dashboard Live</p>
+          </div>
 
-<div class="marquee">
-🚀 MODERN • PROFESIONAL • CEPAT • SIAP PAKAI • BISA CUSTOM 🚀
-</div>
+          <div class="dashboard-grid">
+            <div class="metric big">
+              <small>Total Hari Ini</small>
+              <strong>Rp 3.480.000</strong>
+              <em>+18% dari kemarin</em>
+            </div>
+            <div class="metric">
+              <small>Transaksi</small>
+              <strong>64</strong>
+            </div>
+            <div class="metric">
+              <small>Barang Aktif</small>
+              <strong>128</strong>
+            </div>
+          </div>
 
-<div class="big">
-Aplikasi Custom Sesuai Kebutuhan
-</div>
+          <div class="chart-card">
+            <div class="chart-line"></div>
+            <div class="chart-bars">
+              <i style="height:45%"></i><i style="height:62%"></i><i style="height:38%"></i><i style="height:78%"></i><i style="height:55%"></i><i style="height:88%"></i><i style="height:70%"></i>
+            </div>
+          </div>
 
-<div class="typing" id="typing"></div>
+          <div class="list-card">
+            <div><span class="dot green"></span><p>Absensi masuk</p><b>32</b></div>
+            <div><span class="dot blue"></span><p>Laporan siap</p><b>PDF</b></div>
+            <div><span class="dot violet"></span><p>Rekap pembayaran</p><b>OK</b></div>
+          </div>
+        </div>
 
-<div class="features">
-<div class="feature">📱 Tampilan HP</div>
-<div class="feature">📊 Rekap Spreadsheet</div>
-<div class="feature">⚡ Cepat & Ringan</div>
-<div class="feature">💎 Modern Premium</div>
-</div>
+        <div class="floating-chip chip-1">Realtime UI</div>
+        <div class="floating-chip chip-2">Data Rapi</div>
+        <div class="floating-chip chip-3">Mobile Ready</div>
+      </div>
+    </section>
 
-</div>
+    <section class="section-shell showcase" id="fitur">
+      <div class="section-heading reveal">
+        <span>Fitur Utama</span>
+        <h2>Tampilan serius, bukan template asal-asalan.</h2>
+        <p>Struktur dibuat agar terlihat lebih premium ketika dibuka dari HP maupun laptop.</p>
+      </div>
 
-<div class="actions">
-<div>👍 Suka</div>
-<div>💬 Komentar</div>
-<div>↗️ Bagikan</div>
-</div>
+      <div class="feature-grid">
+        <article class="feature-card reveal card-tilt">
+          <div class="icon">📋</div>
+          <h3>Input Data</h3>
+          <p>Form untuk barang, pelanggan, absensi, transaksi, laporan, atau data harian.</p>
+        </article>
+        <article class="feature-card reveal delay-1 card-tilt">
+          <div class="icon">📊</div>
+          <h3>Rekap Otomatis</h3>
+          <p>Ringkasan harian, mingguan, bulanan, total uang, dan laporan usaha.</p>
+        </article>
+        <article class="feature-card reveal delay-2 card-tilt">
+          <div class="icon">📱</div>
+          <h3>Nyaman di HP</h3>
+          <p>Layout responsif supaya mudah dipakai admin, pegawai, atau pemilik usaha.</p>
+        </article>
+        <article class="feature-card reveal card-tilt">
+          <div class="icon">🔐</div>
+          <h3>Login Admin</h3>
+          <p>Bisa ditambah login, role, dan pembatasan halaman sesuai kebutuhan.</p>
+        </article>
+        <article class="feature-card reveal delay-1 card-tilt">
+          <div class="icon">☁️</div>
+          <h3>Database Online</h3>
+          <p>Bisa disambungkan ke Firebase atau spreadsheet bila sistem butuh penyimpanan.</p>
+        </article>
+        <article class="feature-card reveal delay-2 card-tilt">
+          <div class="icon">✨</div>
+          <h3>Desain Custom</h3>
+          <p>Warna, tulisan, fitur, dan alur aplikasi bisa disesuaikan dengan kebutuhan.</p>
+        </article>
+      </div>
+    </section>
 
-<a class="cta" href="https://wa.me/6281234567890">
-Hubungi WhatsApp Sekarang
-</a>
+    <section class="section-shell split" id="paket">
+      <div class="premium-panel reveal">
+        <span class="panel-label">Estimasi Layanan</span>
+        <h2>Mulai dari aplikasi sederhana sampai sistem usaha.</h2>
+        <p>Harga menyesuaikan tingkat kesulitan, jumlah halaman, database, login, dan fitur laporan.</p>
+      </div>
 
-<div class="comment">
-<b>Calon Pelanggan:</b>
-MasyaAllah tampilannya keren, bisa request fitur?
-</div>
+      <div class="price-stack reveal delay-1">
+        <div class="price-card active card-tilt">
+          <small>Paket Simple</small>
+          <h3>Landing / Form</h3>
+          <p>Cocok untuk promosi, input data ringan, atau halaman usaha.</p>
+        </div>
+        <div class="price-card card-tilt">
+          <small>Paket Usaha</small>
+          <h3>Dashboard + Rekap</h3>
+          <p>Cocok untuk laporan harian, stok barang, kasir, dan data pelanggan.</p>
+        </div>
+        <div class="price-card card-tilt">
+          <small>Paket Custom</small>
+          <h3>Sesuai Kebutuhan</h3>
+          <p>Alur dibuat mengikuti pekerjaan antum agar lebih mudah digunakan.</p>
+        </div>
+      </div>
+    </section>
 
-<div class="comment">
-<b>Admin:</b>
-Bisa insyaAllah sesuai kebutuhan dan tingkat kesulitan.
-</div>
+    <section class="section-shell process" id="proses">
+      <div class="section-heading reveal">
+        <span>Proses Pembuatan</span>
+        <h2>Alur jelas dari awal sampai jadi.</h2>
+      </div>
 
-</div>
+      <div class="timeline">
+        <div class="step reveal"><b>01</b><h3>Ceritakan kebutuhan</h3><p>Sampaikan ingin aplikasi untuk apa dan data apa saja yang dibutuhkan.</p></div>
+        <div class="step reveal delay-1"><b>02</b><h3>Rancang alur</h3><p>Ditentukan halaman, tombol, form, laporan, dan penyimpanan data.</p></div>
+        <div class="step reveal delay-2"><b>03</b><h3>Pembuatan</h3><p>Aplikasi dibuat, dites, lalu diperbaiki bila ada bagian yang kurang pas.</p></div>
+        <div class="step reveal delay-3"><b>04</b><h3>Siap dipakai</h3><p>File bisa dipasang di GitHub Pages, Vercel, atau hosting lain.</p></div>
+      </div>
+    </section>
 
-</main>
+    <section class="section-shell final-cta reveal" id="kontak">
+      <div>
+        <span>Siap dibuatkan?</span>
+        <h2>Konsultasikan kebutuhan aplikasi antum sekarang.</h2>
+        <p>Tidak perlu langsung paham teknis. Cukup jelaskan alur kerja yang ingin dipermudah.</p>
+      </div>
+      <a class="btn btn-primary magnetic" href="https://wa.me/6281234567890" target="_blank" rel="noopener">Chat WhatsApp</a>
+    </section>
+  </main>
 
-<div class="rightbar">
+  <footer>
+    <p>© 2026 AplikasiCustom. Dibuat untuk promosi jasa aplikasi sederhana.</p>
+  </footer>
 
-<div style="color:#65676b;font-size:13px">
-Bersponsor
-</div>
-
-<h3>Jasa Pembuatan Aplikasi</h3>
-
-<div class="price">
-50k - 300k
-</div>
-
-<p style="line-height:1.6;color:#555">
-Cocok untuk UMKM, sekolah, kantin,
-laporan, absensi, dan kebutuhan lainnya.
-</p>
-
-</div>
-
-</div>
-
-<a class="float" href="https://wa.me/6281234567890">
-☎
-</a>
-
-<script>
-const teks = [
-"Modern dan profesional.",
-"Bisa rekap spreadsheet.",
-"Cocok untuk UMKM dan kantin.",
-"Tampilan premium seperti aplikasi besar.",
-"Siap menyesuaikan kebutuhan."
-];
-
-let i = 0;
-let j = 0;
-let hapus = false;
-
-const el = document.getElementById("typing");
-
-function ketik(){
-
-let kalimat = teks[i];
-
-if(!hapus){
-el.textContent = kalimat.substring(0,j++);
-if(j > kalimat.length){
-hapus = true;
-setTimeout(ketik,1200);
-return;
-}
-}else{
-el.textContent = kalimat.substring(0,j--);
-if(j < 0){
-hapus = false;
-i = (i + 1) % teks.length;
-}
-}
-
-setTimeout(ketik,hapus ? 40 : 80);
-}
-
-ketik();
-
-  <script src="animation.js"></script>
-</script>
-
+  <script src="particles.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
