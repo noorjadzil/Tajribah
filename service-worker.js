@@ -1,4 +1,4 @@
-const CACHE_NAME = "maqshof-offline-v1";
+const CACHE_NAME = "maqshof-offline-v2";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",

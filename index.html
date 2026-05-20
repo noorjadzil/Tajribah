@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MAQSHOF Offline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>MAQSHOF</title>
   <meta name="theme-color" content="#0f172a" />
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
@@ -12,9 +12,9 @@
   <header class="app-header">
     <div>
       <h1>MAQSHOF</h1>
-      <p>Aplikasi input masuk & sisa - offline IndexedDB</p>
+      <p>Input harian, laporan, dan kirim rekap ke WhatsApp</p>
     </div>
-    <span id="statusBadge" class="badge">Offline Ready</span>
+    <span id="statusBadge" class="badge">Siap</span>
   </header>
 
   <main class="container">
@@ -33,7 +33,9 @@
         <label>Catatan</label>
         <input type="text" id="catatanInput" placeholder="Contoh: Setoran pagi / sore" />
 
-        <div class="table-wrap">
+        <div class="mobile-list" id="inputMobileList"></div>
+
+        <div class="table-wrap desktop-only">
           <table>
             <thead>
               <tr>
@@ -55,7 +57,7 @@
       <div class="card">
         <div class="row-between">
           <h2>Laporan</h2>
-          <button id="hapusSemuaBtn" class="danger small">Hapus Semua Data</button>
+          <button id="hapusSemuaBtn" class="danger small">Hapus Semua</button>
         </div>
 
         <label>Filter tanggal</label>
@@ -63,7 +65,10 @@
 
         <div class="actions">
           <button id="lihatSemuaBtn" class="secondary">Lihat Semua</button>
-          <button id="exportBtn" class="secondary">Export JSON</button>
+          <button id="exportExcelBtn" class="secondary">Export Excel</button>
+          <button id="exportPdfBtn" class="secondary">Export PDF</button>
+          <button id="exportImageBtn" class="secondary">Export Gambar</button>
+          <button id="shareWaBtn" class="wa">Kirim WA</button>
         </div>
 
         <div id="ringkasanBox" class="summary"></div>
@@ -73,8 +78,16 @@
 
     <section id="settingPage" class="page">
       <div class="card">
+        <h2>Setting WhatsApp</h2>
+        <p class="muted">Isi nomor tujuan agar laporan bisa langsung dikirim.</p>
+        <label>Nomor WhatsApp</label>
+        <input type="tel" id="waNumber" placeholder="Contoh: 6281234567890" />
+        <button id="simpanWaBtn" class="primary">Simpan Nomor WA</button>
+      </div>
+
+      <div class="card gap-top">
         <h2>Setting Item</h2>
-        <p class="muted">Tambah, ubah, atau hapus item. Semua tersimpan offline di IndexedDB.</p>
+        <p class="muted">Tambah, ubah, atau hapus item dan harga.</p>
 
         <div class="setting-grid">
           <input type="hidden" id="editItemId" />
@@ -97,7 +110,7 @@
   </main>
 
   <footer>
-    <small>MAQSHOF Offline · GitHub Pages · IndexedDB</small>
+    <small>MAQSHOF · Laporan Kantin</small>
   </footer>
 
   <script src="app.js"></script>
