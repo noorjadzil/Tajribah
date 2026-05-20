@@ -3,183 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Jasa Pembuatan Aplikasi Modern</title>
-  <meta name="description" content="Jasa pembuatan aplikasi sederhana, modern, profesional, dan sesuai kebutuhan bisnis." />
-  <meta property="og:title" content="Aplikasi Canggih Untuk Bisnis Hebat" />
-  <meta property="og:description" content="Website iklan jasa pembuatan aplikasi dengan animasi telur jatuh, retak, pecah, lalu keluar aplikasi canggih." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/preview.svg" />
-
+  <title>MAQSHOF Offline</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="egg-animation.css" />
 </head>
-
 <body>
-  <canvas id="space"></canvas>
-
-  <div class="cursor-glow"></div>
-
-  <header class="topbar">
-    <a class="brand" href="#">
-      <span class="brand-mark"></span>
-      <span>Aplikasi<span>Custom</span></span>
-    </a>
-
-    <nav class="menu">
-      <a href="#fitur">Fitur</a>
-      <a href="#harga">Harga</a>
-      <a href="#kontak">Kontak</a>
-    </nav>
-
-    <a class="nav-cta" href="https://wa.me/6281234567890">WhatsApp</a>
+  <header class="app-header">
+    <div>
+      <h1>MAQSHOF</h1>
+      <p>Aplikasi input masuk & sisa - offline IndexedDB</p>
+    </div>
+    <span id="statusBadge" class="badge">Offline Ready</span>
   </header>
 
-  <main class="hero">
-    <section class="copy">
-      <div class="eyebrow">JASA PEMBUATAN APLIKASI</div>
+  <main class="container">
+    <nav class="tabs">
+      <button class="tab active" data-page="inputPage">Input</button>
+      <button class="tab" data-page="laporanPage">Laporan</button>
+      <button class="tab" data-page="settingPage">Setting</button>
+    </nav>
 
-      <h1>
-        Dari ide kecil,<br />
-        lahir <span>aplikasi canggih</span>.
-      </h1>
+    <section id="inputPage" class="page active">
+      <div class="card">
+        <h2>Input Harian</h2>
+        <label>Tanggal</label>
+        <input type="date" id="tanggalInput" />
 
-      <p>
-        Website ini dibuat dengan animasi hidup: telur jatuh dari langit,
-        memantul, retak, pecah, lalu menampilkan sistem aplikasi modern
-        untuk bisnis, UMKM, laporan, absensi, dan rekap data.
-      </p>
+        <label>Catatan</label>
+        <input type="text" id="catatanInput" placeholder="Contoh: Setoran pagi / sore" />
 
-      <div class="hero-actions">
-        <a class="btn primary magnetic" href="https://wa.me/6281234567890">Konsultasi Sekarang</a>
-        <a class="btn ghost magnetic" href="#demo">Lihat Demo</a>
-      </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Harga</th>
+                <th>Masuk</th>
+                <th>Sisa</th>
+              </tr>
+            </thead>
+            <tbody id="inputTable"></tbody>
+          </table>
+        </div>
 
-      <div class="trust">
-        <div><b>Custom</b><small>Sesuai kebutuhan</small></div>
-        <div><b>Modern</b><small>Tampilan HP</small></div>
-        <div><b>Rapi</b><small>Laporan jelas</small></div>
+        <button id="simpanBtn" class="primary">Simpan Data</button>
       </div>
     </section>
 
-    <section class="stage" id="demo" aria-label="Animasi telur menjadi aplikasi">
-      <div class="sky-beam"></div>
-      <div class="impact-ring"></div>
-      <div class="shadow"></div>
-
-      <div class="egg-scene">
-        <div class="egg" id="egg">
-          <div class="egg-shine"></div>
-          <span class="crack c1"></span>
-          <span class="crack c2"></span>
-          <span class="crack c3"></span>
-          <span class="crack c4"></span>
+    <section id="laporanPage" class="page">
+      <div class="card">
+        <div class="row-between">
+          <h2>Laporan</h2>
+          <button id="hapusSemuaBtn" class="danger small">Hapus Semua Data</button>
         </div>
 
-        <div class="shell shell-left"></div>
-        <div class="shell shell-right"></div>
-        <div class="shell shell-top"></div>
+        <label>Filter tanggal</label>
+        <input type="date" id="filterTanggal" />
 
-        <div class="core-light"></div>
-
-        <div class="app-system">
-          <div class="device main-device">
-            <div class="device-top">
-              <span></span><span></span><span></span>
-              <b>Dashboard Pro</b>
-            </div>
-
-            <div class="kpi-grid">
-              <div class="kpi"><small>Penjualan</small><b>Rp 25.400.000</b></div>
-              <div class="kpi"><small>Order</small><b>1.284</b></div>
-              <div class="kpi"><small>Growth</small><b>+42%</b></div>
-            </div>
-
-            <div class="chart">
-              <i></i><i></i><i></i><i></i><i></i><i></i>
-              <svg viewBox="0 0 420 130" preserveAspectRatio="none">
-                <path d="M0 95 C45 70, 70 88, 110 58 C150 28, 185 82, 230 45 C285 -2, 300 100, 350 48 C385 20, 405 45, 420 24" />
-              </svg>
-            </div>
-
-            <div class="rows">
-              <div><span>Absensi pegawai</span><b>Aktif</b></div>
-              <div><span>Stok barang</span><b>128 item</b></div>
-              <div><span>Laporan harian</span><b>Siap</b></div>
-            </div>
-          </div>
-
-          <div class="mini-card card-a">
-            <b>📊 Rekap Otomatis</b>
-            <span>Data masuk langsung rapi</span>
-          </div>
-
-          <div class="mini-card card-b">
-            <b>🔐 Aman</b>
-            <span>Login dan akses admin</span>
-          </div>
-
-          <div class="mini-card card-c">
-            <b>📱 Mobile</b>
-            <span>Nyaman dipakai di HP</span>
-          </div>
+        <div class="actions">
+          <button id="lihatSemuaBtn" class="secondary">Lihat Semua</button>
+          <button id="exportBtn" class="secondary">Export JSON</button>
         </div>
 
-        <div class="particles-burst">
-          <span></span><span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
+        <div id="ringkasanBox" class="summary"></div>
+        <div id="laporanList"></div>
       </div>
+    </section>
 
-      <button class="replay magnetic" id="replay">Ulangi Animasi</button>
+    <section id="settingPage" class="page">
+      <div class="card">
+        <h2>Setting Item</h2>
+        <p class="muted">Tambah, ubah, atau hapus item. Semua tersimpan offline di IndexedDB.</p>
+
+        <div class="setting-grid">
+          <input type="hidden" id="editItemId" />
+          <div>
+            <label>Nama item</label>
+            <input type="text" id="namaItem" placeholder="Contoh: Es Teh" />
+          </div>
+          <div>
+            <label>Harga</label>
+            <input type="number" id="hargaItem" placeholder="2700" />
+          </div>
+        </div>
+
+        <button id="simpanItemBtn" class="primary">Tambah Item</button>
+        <button id="batalEditBtn" class="secondary hidden">Batal Edit</button>
+
+        <div id="itemList" class="item-list"></div>
+      </div>
     </section>
   </main>
 
-  <section class="section" id="fitur">
-    <div class="section-title">
-      <span>FITUR</span>
-      <h2>Sistem sederhana, rasa aplikasi premium.</h2>
-    </div>
-
-    <div class="features">
-      <article>
-        <strong>01</strong>
-        <h3>Input Data</h3>
-        <p>Form untuk barang, absensi, pelanggan, pemasukan, pengeluaran, dan laporan harian.</p>
-      </article>
-
-      <article>
-        <strong>02</strong>
-        <h3>Dashboard</h3>
-        <p>Ringkasan data dibuat lebih mudah dibaca dengan tampilan modern dan profesional.</p>
-      </article>
-
-      <article>
-        <strong>03</strong>
-        <h3>Rekap Laporan</h3>
-        <p>Data bisa dibuat rapi untuk laporan harian, mingguan, bulanan, atau kebutuhan usaha.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="pricing" id="harga">
-    <div>
-      <span class="eyebrow">HARGA FLEKSIBEL</span>
-      <h2>Mulai dari aplikasi sederhana sampai sistem custom.</h2>
-      <p>Harga menyesuaikan tingkat kesulitan, jumlah halaman, database, login, dan fitur khusus.</p>
-    </div>
-
-    <a class="btn primary magnetic" href="https://wa.me/6281234567890">Tanya Kebutuhan Saya</a>
-  </section>
-
-  <footer id="kontak">
-    <p>© 2026 AplikasiCustom. Dibuat untuk iklan jasa aplikasi modern.</p>
-    <a href="https://wa.me/6281234567890">Hubungi WhatsApp</a>
+  <footer>
+    <small>MAQSHOF Offline · GitHub Pages · IndexedDB</small>
   </footer>
 
-  <script src="particles.js"></script>
-  <script src="egg-animation.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
