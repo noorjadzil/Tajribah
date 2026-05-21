@@ -1,27 +1,20 @@
-import { APP_CONFIG } from './config.js';
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kasir PWA</title>
 
-export function formatRp(number) {
-  return `${APP_CONFIG.currency} ${Number(number || 0).toLocaleString('id-ID')}`;
-}
+  <meta name="theme-color" content="#0f172a"/>
 
-export function makeNotaText(cart) {
-  const total = cart.reduce((sum, item) => sum + item.harga * item.qty, 0);
-  const lines = [
-    `*NOTA ${APP_CONFIG.appName.toUpperCase()}*`,
-    new Date().toLocaleString('id-ID'),
-    '',
-    ...cart.map(item => `${item.nama} x${item.qty} = ${formatRp(item.harga * item.qty)}`),
-    '',
-    `Total: *${formatRp(total)}*`
-  ];
-  return lines.join('\n');
-}
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
 
-export function openWhatsApp(text) {
-  if (!text || text.includes('Total: *Rp 0*')) return alert('Keranjang masih kosong');
-  const number = APP_CONFIG.waNumber;
-  const url = number
-    ? `https://wa.me/${number}?text=${encodeURIComponent(text)}`
-    : `https://wa.me/?text=${encodeURIComponent(text)}`;
-  window.open(url, '_blank');
-}
+  <div id="app"></div>
+
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
