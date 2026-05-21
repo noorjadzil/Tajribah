@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Kasir PWA</title>
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-  <div id="app"></div>
-  <script type="module" src="js/app.js"></script>
-</body>
-</html>
+const CACHE_NAME = 'kasir-pwa-v1';
+
+const urlsToCache = [
+  './',
+  './index.html',
+  './css/style.css',
+  './js/app.js',
+  './manifest.json'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
+  );
+});
