@@ -1,12 +1,20 @@
-{
-  "name": "MAQSHOF",
-  "short_name": "MAQSHOF",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
-  "icons": [
-    { "src": "icon.svg", "sizes": "192x192", "type": "image/svg+xml" },
-    { "src": "icon.svg", "sizes": "512x512", "type": "image/svg+xml" }
-  ]
+import { APP_CONFIG } from './config.js';
+
+export function renderSetting() {
+  const page = document.getElementById('page');
+  page.innerHTML = `
+    <section class="card">
+      <h2>Setting</h2>
+      <p class="muted">Untuk versi awal, setting utama masih di file <b>js/config.js</b>.</p>
+      <table>
+        <tr><th>Nama App</th><td>${APP_CONFIG.appName}</td></tr>
+        <tr><th>No WhatsApp</th><td>${APP_CONFIG.waNumber || '-'}</td></tr>
+        <tr><th>Firebase URL</th><td>${APP_CONFIG.firebaseUrl || '-'}</td></tr>
+      </table>
+    </section>
+    <section class="card">
+      <h2>Rencana Fitur Berikutnya</h2>
+      <p>Firebase sync, export PDF/Excel, barcode, printer bluetooth, konsinyasi mitra, dan multi user.</p>
+    </section>
+  `;
 }
