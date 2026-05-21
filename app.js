@@ -115,17 +115,107 @@ function batalEdit(){ document.getElementById("editItemId").value=""; document.g
 async function simpanItem(){ const id=document.getElementById("editItemId").value; const nama=document.getElementById("namaItem").value.trim(); const harga=Number(document.getElementById("hargaItem").value||0); if(!nama){alert("Nama item wajib diisi.");return;} if(id) await putData("items",{id:Number(id),nama,harga}); else await addData("items",{nama,harga}); batalEdit(); await renderItems(); await renderInput(); }
 async function hapusItem(id){ if(confirm("Hapus item ini? Data laporan lama tetap tersimpan.")){ await deleteData("items", id); await renderItems(); await renderInput(); } }
 
-function buildExportHtml(){
-  const filter = document.getElementById("filterTanggal").value;
-  let totalMasuk=0,totalSisa=0,totalTerjual=0,totalUang=0;
-  const sections = currentLaporan.map(l=>{
-    const rows = l.items.map(i=>{ totalMasuk+=Number(i.masuk||0); totalSisa+=Number(i.sisa||0); totalTerjual+=Number(i.terjual||0); totalUang+=Number(i.total||0); return `<tr><td>${escapeHtml(i.nama)}</td><td>${i.harga}</td><td>${i.masuk}</td><td>${i.sisa}</td><td>${i.terjual}</td><td>${i.total}</td></tr>`; }).join("");
-    return `<h3>${l.tanggal}</h3><p>${escapeHtml(l.catatan || "-")}</p><table><thead><tr><th>Item</th><th>Harga</th><th>Masuk</th><th>Sisa</th><th>Terjual</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table>`;
-  }).join("<br>");
-  return `<div class="export-area-content"><h2>Laporan MAQSHOF</h2><p>Filter: ${filter || "Semua tanggal"}</p><p><b>Masuk:</b> ${totalMasuk} &nbsp; <b>Sisa:</b> ${totalSisa} &nbsp; <b>Terjual:</b> ${totalTerjual} &nbsp; <b>Total:</b> ${rupiah(totalUang)}</p>${sections || "<p>Belum ada data.</p>"}</div>`;
+function getExportRows(){
+  const rows = [];
+  currentLaporan.forEach(l=>{
+    (l.items || []).forEach(i=>{
+      rows.push({
+        tanggal: l.tanggal || "",
+        catatan: l.catatan || "",
+        item: i.nama || "",
+        harga: Number(i.harga || 0),
+        masuk: Number(i.masuk || 0),
+        sisa: Number(i.sisa || 0),
+        terjual: Number(i.terjual || 0),
+        total: Number(i.total || 0)
+      });
+    });
+  });
+  return rows;
+}
+function getExportSummary(rows){
+  return rows.reduce((a,r)=>{
+    a.masuk += r.masuk; a.sisa += r.sisa; a.terjual += r.terjual; a.total += r.total;
+    return a;
+  }, {masuk:0, sisa:0, terjual:0, total:0});
 }
 function downloadBlob(blob, filename){ const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download=filename; a.click(); setTimeout(()=>URL.revokeObjectURL(url), 1000); }
-function exportExcel(){ const html = `<html><head><meta charset="UTF-8"></head><body>${buildExportHtml()}</body></html>`; downloadBlob(new Blob([html],{type:"application/vnd.ms-excel"}), `laporan-maqshof-${today()}.xls`); }
+function csvCell(v){ const s=String(v ?? ""); return /[",\n;]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; }
+function exportExcelCsv(){
+  const rows = getExportRows();
+  const header = ["Tanggal","Catatan","Item","Harga","Masuk","Sisa","Terjual","Total"];
+  const lines = [header.join(",")].concat(rows.map(r=>[r.tanggal,r.catatan,r.item,r.harga,r.masuk,r.sisa,r.terjual,r.total].map(csvCell).join(",")));
+  const blob = new Blob(["\ufeff" + lines.join("\n")], {type:"text/csv;charset=utf-8"});
+  downloadBlob(blob, `laporan-maqshof-csv-${today()}.csv`);
+}
+function buildExportHtml(){
+  const filter = document.getElementById("filterTanggal").value;
+  const rows = getExportRows();
+  const summary = getExportSummary(rows);
+  const sections = currentLaporan.map(l=>{
+    const body = (l.items || []).map(i=>`<tr><td>${escapeHtml(i.nama)}</td><td>${i.harga}</td><td>${i.masuk}</td><td>${i.sisa}</td><td>${i.terjual}</td><td>${i.total}</td></tr>`).join("");
+    return `<h3>${l.tanggal}</h3><p>${escapeHtml(l.catatan || "-")}</p><table><thead><tr><th>Item</th><th>Harga</th><th>Masuk</th><th>Sisa</th><th>Terjual</th><th>Total</th></tr></thead><tbody>${body}</tbody></table>`;
+  }).join("<br>");
+  return `<div class="export-area-content"><h2>Laporan MAQSHOF</h2><p>Filter: ${filter || "Semua tanggal"}</p><p><b>Masuk:</b> ${summary.masuk} &nbsp; <b>Sisa:</b> ${summary.sisa} &nbsp; <b>Terjual:</b> ${summary.terjual} &nbsp; <b>Total:</b> ${rupiah(summary.total)}</p>${sections || "<p>Belum ada data.</p>"}</div>`;
+}
+function exportExcelXls(){
+  const html = `<html><head><meta charset="UTF-8"><style>table{border-collapse:collapse}th,td{border:1px solid #999;padding:6px}th{background:#dbeafe}h2{color:#0f172a}</style></head><body>${buildExportHtml()}</body></html>`;
+  downloadBlob(new Blob([html],{type:"application/vnd.ms-excel;charset=utf-8"}), `laporan-maqshof-html-${today()}.xls`);
+}
+function xmlEscape(v){ return String(v ?? "").replace(/[&<>\"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
+function exportExcelXml(){
+  const rows = getExportRows();
+  const summary = getExportSummary(rows);
+  let xml = `<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="title"><Font ss:Bold="1" ss:Size="16"/><Interior ss:Color="#DBEAFE" ss:Pattern="Solid"/></Style><Style ss:ID="head"><Font ss:Bold="1"/><Interior ss:Color="#E0F2FE" ss:Pattern="Solid"/><Borders><Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/></Borders></Style><Style ss:ID="money"><NumberFormat ss:Format="&quot;Rp&quot; #,##0"/></Style></Styles><Worksheet ss:Name="Laporan"><Table>`;
+  xml += `<Row><Cell ss:MergeAcross="7" ss:StyleID="title"><Data ss:Type="String">Laporan MAQSHOF</Data></Cell></Row>`;
+  xml += `<Row><Cell><Data ss:Type="String">Total Masuk</Data></Cell><Cell><Data ss:Type="Number">${summary.masuk}</Data></Cell><Cell><Data ss:Type="String">Total Sisa</Data></Cell><Cell><Data ss:Type="Number">${summary.sisa}</Data></Cell><Cell><Data ss:Type="String">Terjual</Data></Cell><Cell><Data ss:Type="Number">${summary.terjual}</Data></Cell><Cell><Data ss:Type="String">Total Uang</Data></Cell><Cell ss:StyleID="money"><Data ss:Type="Number">${summary.total}</Data></Cell></Row>`;
+  xml += `<Row>${["Tanggal","Catatan","Item","Harga","Masuk","Sisa","Terjual","Total"].map(h=>`<Cell ss:StyleID="head"><Data ss:Type="String">${h}</Data></Cell>`).join("")}</Row>`;
+  rows.forEach(r=>{
+    xml += `<Row><Cell><Data ss:Type="String">${xmlEscape(r.tanggal)}</Data></Cell><Cell><Data ss:Type="String">${xmlEscape(r.catatan)}</Data></Cell><Cell><Data ss:Type="String">${xmlEscape(r.item)}</Data></Cell><Cell ss:StyleID="money"><Data ss:Type="Number">${r.harga}</Data></Cell><Cell><Data ss:Type="Number">${r.masuk}</Data></Cell><Cell><Data ss:Type="Number">${r.sisa}</Data></Cell><Cell><Data ss:Type="Number">${r.terjual}</Data></Cell><Cell ss:StyleID="money"><Data ss:Type="Number">${r.total}</Data></Cell></Row>`;
+  });
+  xml += `</Table></Worksheet></Workbook>`;
+  downloadBlob(new Blob([xml], {type:"application/vnd.ms-excel;charset=utf-8"}), `laporan-maqshof-xml-${today()}.xml`);
+}
+function crc32(str){
+  const table = crc32.table || (crc32.table = Array.from({length:256},(_,n)=>{let c=n; for(let k=0;k<8;k++) c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1); return c>>>0;}));
+  let crc = -1; for(let i=0;i<str.length;i++) crc=(crc>>>8)^table[(crc^str.charCodeAt(i))&255]; return (crc ^ -1) >>> 0;
+}
+function u16(n){ return String.fromCharCode(n&255,(n>>>8)&255); }
+function u32(n){ return String.fromCharCode(n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255); }
+function zipStore(files){
+  let local="", central="", offset=0;
+  files.forEach(f=>{
+    const name=f.name, data=f.data, crc=crc32(data), size=data.length;
+    const head="PK\x03\x04"+u16(20)+u16(0)+u16(0)+u16(0)+u16(0)+u16(0)+u32(crc)+u32(size)+u32(size)+u16(name.length)+u16(0)+name;
+    local += head + data;
+    central += "PK\x01\x02"+u16(20)+u16(20)+u16(0)+u16(0)+u16(0)+u16(0)+u16(0)+u32(crc)+u32(size)+u32(size)+u16(name.length)+u16(0)+u16(0)+u16(0)+u16(0)+u32(0)+u32(offset)+name;
+    offset += head.length + size;
+  });
+  return local + central + "PK\x05\x06" + u16(0)+u16(0)+u16(files.length)+u16(files.length)+u32(central.length)+u32(local.length)+u16(0);
+}
+function colName(n){ let s=""; while(n>0){ let m=(n-1)%26; s=String.fromCharCode(65+m)+s; n=Math.floor((n-1)/26); } return s; }
+function xlsxCell(v, r, c){
+  const ref=colName(c)+r;
+  if(typeof v === "number") return `<c r="${ref}"><v>${v}</v></c>`;
+  return `<c r="${ref}" t="inlineStr"><is><t>${xmlEscape(v)}</t></is></c>`;
+}
+function exportExcelXlsx(){
+  const rows = getExportRows();
+  const summary = getExportSummary(rows);
+  const data = [["Laporan MAQSHOF"],["Total Masuk",summary.masuk,"Total Sisa",summary.sisa,"Terjual",summary.terjual,"Total Uang",summary.total],["Tanggal","Catatan","Item","Harga","Masuk","Sisa","Terjual","Total"], ...rows.map(r=>[r.tanggal,r.catatan,r.item,r.harga,r.masuk,r.sisa,r.terjual,r.total])];
+  const sheetRows = data.map((row,idx)=>`<row r="${idx+1}">${row.map((v,j)=>xlsxCell(v,idx+1,j+1)).join("")}</row>`).join("");
+  const sheet = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><cols><col min="1" max="1" width="14" customWidth="1"/><col min="2" max="2" width="24" customWidth="1"/><col min="3" max="3" width="24" customWidth="1"/><col min="4" max="8" width="12" customWidth="1"/></cols><sheetData>${sheetRows}</sheetData></worksheet>`;
+  const files = [
+    {name:"[Content_Types].xml", data:`<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>`},
+    {name:"_rels/.rels", data:`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`},
+    {name:"xl/workbook.xml", data:`<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Laporan" sheetId="1" r:id="rId1"/></sheets></workbook>`},
+    {name:"xl/_rels/workbook.xml.rels", data:`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>`},
+    {name:"xl/worksheets/sheet1.xml", data:sheet}
+  ];
+  const zip = zipStore(files);
+  const bytes = Uint8Array.from(zip, ch=>ch.charCodeAt(0));
+  downloadBlob(new Blob([bytes], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}), `laporan-maqshof-xlsx-${today()}.xlsx`);
+}
 function exportPdf(){ window.print(); }
 function makeExportElement(){ const div=document.createElement("div"); div.className="export-area"; div.innerHTML=buildExportHtml(); document.body.appendChild(div); return div; }
 function htmlToCanvasBlob(el){
@@ -164,7 +254,10 @@ function setupEvents(){
   document.getElementById("simpanItemBtn").addEventListener("click", simpanItem);
   document.getElementById("batalEditBtn").addEventListener("click", batalEdit);
   document.getElementById("simpanWaBtn").addEventListener("click", saveWa);
-  document.getElementById("exportExcelBtn").addEventListener("click", exportExcel);
+  document.getElementById("exportCsvBtn").addEventListener("click", exportExcelCsv);
+  document.getElementById("exportXlsBtn").addEventListener("click", exportExcelXls);
+  document.getElementById("exportXmlBtn").addEventListener("click", exportExcelXml);
+  document.getElementById("exportXlsxBtn").addEventListener("click", exportExcelXlsx);
   document.getElementById("exportPdfBtn").addEventListener("click", exportPdf);
   document.getElementById("exportImageBtn").addEventListener("click", ()=>exportImage(false));
   document.getElementById("shareWaBtn").addEventListener("click", shareWa);
