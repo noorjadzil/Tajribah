@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporan Penjualan Harian</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .container {
+      padding: 14px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 7px;
+      text-align: center;
+    }
+
+    th {
+      background: #e2e8f0;
+    }
+
+    .left {
+      text-align: left;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .primary {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    .green {
+      background: #15803d;
+      color: white;
+    }
+
+    .red {
+      background: #b91c1c;
+      color: white;
+    }
+
+    .total-box {
+      font-size: 20px;
+      font-weight: bold;
+      background: #ecfeff;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Laporan Penjualan Harian</h1>
+  <p>Bubur Extra Topping</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Data Laporan</h2>
+
+    <label>Tanggal</label>
+    <input type="date" id="tanggal">
+
+    <label>Catatan</label>
+    <textarea id="catatan" placeholder="Contoh: setor, kurang, tambahan stok..."></textarea>
+  </div>
+
+  <div class="card">
+    <h2>Penjualan Bubur</h2>
+    <table id="tabelProduk">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Harga</th>
+          <th>Jumlah</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Extra Topping / Tambahan</h2>
+    <table id="tabelExtra">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Harga</th>
+          <th>Jumlah</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Minuman / Lainnya</h2>
+    <table id="tabelMinuman">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Harga</th>
+          <th>Jumlah</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Stok Perlengkapan</h2>
+    <table id="tabelStok">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Stok Awal</th>
+          <th>Stok Laku</th>
+          <th>Sisa</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Kekurangan / Catatan Barang</h2>
+    <table id="tabelKurang">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Kurang</th>
+          <th>Cukup</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Total Semua</h2>
+    <div class="total-box" id="grandTotal">Rp 0</div>
+
+    <button class="primary" onclick="simpan()">Simpan Laporan</button>
+    <button class="green" onclick="kirimWA()">Kirim ke WhatsApp</button>
+    <button class="red" onclick="hapusData()">Hapus Data Hari Ini</button>
+
+    <p class="small">Data tersimpan di HP/browser menggunakan localStorage.</p>
+  </div>
+
+</div>
+
+<script>
+  const produk = [
+    { nama: "Bubur Ori", harga: 7000 },
+    { nama: "Bubur Cakwe", harga: 12000 },
+    { nama: "Bubur Telur", harga: 12000 },
+    { nama: "Bubur Ayam Suwir", harga: 15000 },
+    { nama: "Bubur Abon", harga: 17000 },
+    { nama: "Bubur Spesial", harga: 13000 },
+    { nama: "Bubur Istimewa", harga: 17000 },
+  ];
+
+  const extra = [
+    { nama: "Cakwe", harga: 2000 },
+    { nama: "Ayam Suwir", harga: 3000 },
+    { nama: "Abon", harga: 5000 },
+    { nama: "Irisan Telur Dadar", harga: 1000 },
+    { nama: "Telur Rebus", harga: 1000 },
+    { nama: "Kuah", harga: 500 },
+    { nama: "Krupuk", harga: 500 },
+  ];
+
+  const minuman = [
+    { nama: "Puyuh", harga: 3000 },
+    { nama: "Cleo", harga: 1000 },
+    { nama: "Teh Anget", harga: 3000 },
+    { nama: "Es Teh", harga: 3000 },
+  ];
+
+  const stok = [
+    "Paper Bowl",
+    "Tali Segel",
+    "Sendok",
+    "Krupuk",
+    "Kripik Pangsit",
+    "Bawang Goreng",
+    "Kacang Kedelai"
+  ];
+
+  const kurang = [
+    "Cleo",
+    "Tisu",
+    "Plastik Kecap",
+    "Plastik Kuah",
+    "Plastik Sambal",
+    "Kecap Asin",
+    "Kecap Manis",
+    "Lada",
+    "Kresek Kecil",
+    "Kresek Tanggung",
+    "Kresek Besar"
+  ];
+
+  document.getElementById("tanggal").valueAsDate = new Date();
+
+  function rupiah(angka) {
+    return "Rp " + Number(angka || 0).toLocaleString("id-ID");
+  }
+
+  function buatTabelBarang(id, data, prefix) {
+    const tbody = document.querySelector(`#${id} tbody`);
+    tbody.innerHTML = "";
+
+    data.forEach((item, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td class="left">${item.nama}</td>
+          <td>${rupiah(item.harga)}</td>
+          <td>
+            <input type="number" min="0" id="${prefix}_jumlah_${i}" value="0" oninput="hitung()">
+          </td>
+          <td id="${prefix}_total_${i}">Rp 0</td>
+        </tr>
+      `;
+    });
+  }
+
+  function buatTabelStok() {
+    const tbody = document.querySelector("#tabelStok tbody");
+    tbody.innerHTML = "";
+
+    stok.forEach((nama, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td class="left">${nama}</td>
+          <td><input type="number" id="stok_awal_${i}" value="0" oninput="hitungStok(${i})"></td>
+          <td><input type="number" id="stok_laku_${i}" value="0" oninput="hitungStok(${i})"></td>
+          <td id="stok_sisa_${i}">0</td>
+        </tr>
+      `;
+    });
+  }
+
+  function buatTabelKurang() {
+    const tbody = document.querySelector("#tabelKurang tbody");
+    tbody.innerHTML = "";
+
+    kurang.forEach((nama, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td class="left">${nama}</td>
+          <td><input type="checkbox" id="kurang_${i}"></td>
+          <td><input type="checkbox" id="cukup_${i}"></td>
+        </tr>
+      `;
+    });
+  }
+
+  function hitung() {
+    let totalSemua = 0;
+
+    totalSemua += hitungBarang(produk, "produk");
+    totalSemua += hitungBarang(extra, "extra");
+    totalSemua += hitungBarang(minuman, "minuman");
+
+    document.getElementById("grandTotal").innerText = rupiah(totalSemua);
+  }
+
+  function hitungBarang(data, prefix) {
+    let total = 0;
+
+    data.forEach((item, i) => {
+      const jumlah = Number(document.getElementById(`${prefix}_jumlah_${i}`).value || 0);
+      const subtotal = jumlah * item.harga;
+      total += subtotal;
+      document.getElementById(`${prefix}_total_${i}`).innerText = rupiah(subtotal);
+    });
+
+    return total;
+  }
+
+  function hitungStok(i) {
+    const awal = Number(document.getElementById(`stok_awal_${i}`).value || 0);
+    const laku = Number(document.getElementById(`stok_laku_${i}`).value || 0);
+    document.getElementById(`stok_sisa_${i}`).innerText = awal - laku;
+  }
+
+  function ambilBarang(data, prefix) {
+    return data.map((item, i) => {
+      const jumlah = Number(document.getElementById(`${prefix}_jumlah_${i}`).value || 0);
+      return {
+        nama: item.nama,
+        harga: item.harga,
+        jumlah,
+        total: jumlah * item.harga
+      };
+    });
+  }
+
+  function ambilStok() {
+    return stok.map((nama, i) => {
+      const awal = Number(document.getElementById(`stok_awal_${i}`).value || 0);
+      const laku = Number(document.getElementById(`stok_laku_${i}`).value || 0);
+      return {
+        nama,
+        stokAwal: awal,
+        stokLaku: laku,
+        sisa: awal - laku
+      };
+    });
+  }
+
+  function ambilKurang() {
+    return kurang.map((nama, i) => ({
+      nama,
+      kurang: document.getElementById(`kurang_${i}`).checked,
+      cukup: document.getElementById(`cukup_${i}`).checked
+    }));
+  }
+
+  function buatData() {
+    const dataProduk = ambilBarang(produk, "produk");
+    const dataExtra = ambilBarang(extra, "extra");
+    const dataMinuman = ambilBarang(minuman, "minuman");
+
+    const total =
+      dataProduk.reduce((a, b) => a + b.total, 0) +
+      dataExtra.reduce((a, b) => a + b.total, 0) +
+      dataMinuman.reduce((a, b) => a + b.total, 0);
+
+    return {
+      tanggal: document.getElementById("tanggal").value,
+      catatan: document.getElementById("catatan").value,
+      produk: dataProduk,
+      extra: dataExtra,
+      minuman: dataMinuman,
+      stok: ambilStok(),
+      kurang: ambilKurang(),
+      total
+    };
+  }
+
+  function simpan() {
+    const data = buatData();
+    localStorage.setItem("laporan_" + data.tanggal, JSON.stringify(data));
+    alert("Laporan berhasil disimpan");
+  }
+
+  function muatData() {
+    const tanggal = document.getElementById("tanggal").value;
+    const data = JSON.parse(localStorage.getItem("laporan_" + tanggal) || "null");
+    if (!data) return;
+
+    document.getElementById("catatan").value = data.catatan || "";
+
+    isiBarang(data.produk, "produk");
+    isiBarang(data.extra, "extra");
+    isiBarang(data.minuman, "minuman");
+
+    data.stok?.forEach((item, i) => {
+      if (document.getElementById(`stok_awal_${i}`)) {
+        document.getElementById(`stok_awal_${i}`).value = item.stokAwal;
+        document.getElementById(`stok_laku_${i}`).value = item.stokLaku;
+        document.getElementById(`stok_sisa_${i}`).innerText = item.sisa;
+      }
+    });
+
+    data.kurang?.forEach((item, i) => {
+      if (document.getElementById(`kurang_${i}`)) {
+        document.getElementById(`kurang_${i}`).checked = item.kurang;
+        document.getElementById(`cukup_${i}`).checked = item.cukup;
+      }
+    });
+
+    hitung();
+  }
+
+  function isiBarang(data, prefix) {
+    data?.forEach((item, i) => {
+      if (document.getElementById(`${prefix}_jumlah_${i}`)) {
+        document.getElementById(`${prefix}_jumlah_${i}`).value = item.jumlah;
+      }
+    });
+  }
+
+  function kirimWA() {
+    const data = buatData();
+
+    let teks = `*LAPORAN PENJUALAN HARIAN*\n`;
+    teks += `Tanggal: ${data.tanggal}\n\n`;
+
+    teks += `*PENJUALAN BUBUR*\n`;
+    teks += buatTeksBarang(data.produk);
+
+    teks += `\n*EXTRA TOPPING*\n`;
+    teks += buatTeksBarang(data.extra);
+
+    teks += `\n*MINUMAN / LAINNYA*\n`;
+    teks += buatTeksBarang(data.minuman);
+
+    teks += `\n*STOK PERLENGKAPAN*\n`;
+    data.stok.forEach(item => {
+      if (item.stokAwal || item.stokLaku) {
+        teks += `${item.nama}: awal ${item.stokAwal}, laku ${item.stokLaku}, sisa ${item.sisa}\n`;
+      }
+    });
+
+    teks += `\n*BARANG KURANG*\n`;
+    data.kurang.forEach(item => {
+      if (item.kurang) teks += `- ${item.nama}\n`;
+    });
+
+    teks += `\n*TOTAL SEMUA: ${rupiah(data.total)}*`;
+
+    if (data.catatan) {
+      teks += `\n\nCatatan:\n${data.catatan}`;
+    }
+
+    window.open("https://wa.me/?text=" + encodeURIComponent(teks), "_blank");
+  }
+
+  function buatTeksBarang(data) {
+    let teks = "";
+    data.forEach(item => {
+      if (item.jumlah > 0) {
+        teks += `${item.nama} x${item.jumlah} = ${rupiah(item.total)}\n`;
+      }
+    });
+    return teks || "-\n";
+  }
+
+  function hapusData() {
+    const tanggal = document.getElementById("tanggal").value;
+    if (confirm("Hapus data tanggal ini?")) {
+      localStorage.removeItem("laporan_" + tanggal);
+      location.reload();
+    }
+  }
+
+  document.getElementById("tanggal").addEventListener("change", () => {
+    location.reload();
+  });
+
+  buatTabelBarang("tabelProduk", produk, "produk");
+  buatTabelBarang("tabelExtra", extra, "extra");
+  buatTabelBarang("tabelMinuman", minuman, "minuman");
+  buatTabelStok();
+  buatTabelKurang();
+  muatData();
+  hitung();
+</script>
+
+</body>
+</html>
