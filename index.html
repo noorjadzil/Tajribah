@@ -10,19 +10,18 @@
       --bg1: #020617;
       --bg2: #0f172a;
       --card: rgba(255,255,255,.075);
-      --card2: rgba(255,255,255,.115);
+      --card2: rgba(255,255,255,.12);
       --line: rgba(255,255,255,.14);
       --text: #f8fafc;
       --muted: #cbd5e1;
       --soft: #94a3b8;
       --gold: #facc15;
       --blue: #38bdf8;
+      --green: #22c55e;
       --radius: 22px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -30,10 +29,10 @@
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(56,189,248,.22), transparent 32%),
-        radial-gradient(circle at top right, rgba(250,204,21,.10), transparent 28%),
+        radial-gradient(circle at top left, rgba(56,189,248,.24), transparent 33%),
+        radial-gradient(circle at top right, rgba(250,204,21,.12), transparent 30%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
-      padding: 22px;
+      padding: 20px;
     }
 
     .wrap {
@@ -42,14 +41,14 @@
     }
 
     .hero {
-      padding: 34px 0 26px;
+      padding: 36px 0 26px;
     }
 
     .badge {
       display: inline-flex;
       gap: 8px;
       align-items: center;
-      padding: 8px 12px;
+      padding: 8px 13px;
       border: 1px solid var(--line);
       border-radius: 999px;
       color: var(--muted);
@@ -68,13 +67,13 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(34px, 6vw, 62px);
+      font-size: clamp(34px, 6vw, 64px);
       line-height: 1.02;
       letter-spacing: -1.8px;
     }
 
     .hero p {
-      max-width: 720px;
+      max-width: 760px;
       margin: 18px 0 0;
       color: var(--muted);
       font-size: 17px;
@@ -92,7 +91,7 @@
       border: 1px solid var(--line);
       background: rgba(255,255,255,.055);
       border-radius: 18px;
-      padding: 14px;
+      padding: 15px;
     }
 
     .mini b {
@@ -107,7 +106,7 @@
     }
 
     .section-title {
-      margin: 28px 0 14px;
+      margin: 30px 0 14px;
       color: var(--soft);
       font-size: 13px;
       letter-spacing: 2px;
@@ -129,7 +128,7 @@
     }
 
     details[open] {
-      border-color: rgba(250,204,21,.34);
+      border-color: rgba(250,204,21,.35);
     }
 
     summary {
@@ -147,15 +146,15 @@
     }
 
     .num {
-      width: 42px;
-      height: 42px;
+      width: 43px;
+      height: 43px;
       border-radius: 14px;
       display: grid;
       place-items: center;
       background: rgba(250,204,21,.13);
       color: var(--gold);
       font-weight: 800;
-      border: 1px solid rgba(250,204,21,.22);
+      border: 1px solid rgba(250,204,21,.24);
     }
 
     .head h2 {
@@ -189,7 +188,7 @@
     }
 
     .body {
-      padding: 0 20px 22px 77px;
+      padding: 0 20px 22px 78px;
       color: #e2e8f0;
       line-height: 1.8;
     }
@@ -217,6 +216,20 @@
       font-weight: 700;
     }
 
+    .daily {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .check {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line);
+      color: #e2e8f0;
+    }
+
     .closing {
       margin: 24px 0 40px;
       padding: 24px;
@@ -228,9 +241,7 @@
     }
 
     @media (max-width: 760px) {
-      body {
-        padding: 16px;
-      }
+      body { padding: 16px; }
 
       .summary {
         grid-template-columns: repeat(2, 1fr);
@@ -259,14 +270,15 @@
     <section class="hero">
       <div class="badge">
         <span class="dot"></span>
-        Catatan inti untuk arah hidup, ilmu, usaha, dan amal
+        Catatan inti untuk arah hidup, ilmu, amal, usaha, dan warisan
       </div>
 
       <h1>Catatan Hidup<br>yang Dijalankan</h1>
 
       <p>
-        Dibuat ringkas agar cepat dipahami, namun tetap memiliki penjelasan mendalam
-        ketika ingin direnungkan. Bukan sekadar catatan motivasi, tapi peta tindakan.
+        Catatan ini dibuat agar poin penting bisa langsung dipahami,
+        lalu penjelasannya bisa dibuka saat ingin direnungkan lebih dalam.
+        Tujuannya bukan sekadar dibaca, tetapi dijalankan.
       </p>
     </section>
 
@@ -276,8 +288,8 @@
         <span>Iman & tujuan</span>
       </div>
       <div class="mini">
-        <b>Ilmu</b>
-        <span>Belajar tepat</span>
+        <b>Akhlak</b>
+        <span>Adab & amanah</span>
       </div>
       <div class="mini">
         <b>Amal</b>
@@ -298,12 +310,12 @@
           <div class="num">01</div>
           <div class="head">
             <h2>Iman — Arah Hidup</h2>
-            <p>Semua ilmu, usaha, dan uang harus mengarah kepada ridha Allah.</p>
+            <p>Semua tujuan, ilmu, usaha, dan uang harus mengarah kepada ridha Allah.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
         <div class="body">
-          <p><b>Intinya:</b> seseorang bisa sibuk, pintar, dan kaya, tetapi tetap kehilangan arah jika tidak memiliki tujuan akhir yang benar.</p>
+          <p><b>Intinya:</b> seseorang bisa sibuk, pintar, dan kaya, tetapi tetap kehilangan arah jika tujuan akhirnya salah.</p>
           <ul>
             <li>Untuk apa saya hidup?</li>
             <li>Apa yang membuat Allah ridha?</li>
@@ -317,13 +329,34 @@
         <summary>
           <div class="num">02</div>
           <div class="head">
+            <h2>Adab — Penjaga Ilmu dan Hidup</h2>
+            <p>Ilmu, usaha, dan kemampuan harus dijaga dengan akhlak yang baik.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> ilmu dan kemampuan bisa rusak jika tidak disertai adab, amanah, jujur, sabar, dan rendah hati.</p>
+          <ul>
+            <li>Jujur dalam ucapan, catatan, dan usaha.</li>
+            <li>Amanah ketika dipercaya orang.</li>
+            <li>Rendah hati ketika mulai bisa.</li>
+            <li>Sabar ketika proses belum terlihat hasilnya.</li>
+          </ul>
+          <div class="formula">Ilmu tinggi tanpa adab bisa menjadi sebab kerusakan.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="num">03</div>
+          <div class="head">
             <h2>Ilmu — Belajar yang Dibutuhkan</h2>
             <p>Jangan belajar semua hal. Pelajari yang dibutuhkan dan bermanfaat.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
         <div class="body">
-          <p><b>Intinya:</b> ilmu harus dipilih berdasarkan kebutuhan hidup, agama, usaha, dan manfaat nyata.</p>
+          <p><b>Intinya:</b> ilmu harus dipilih berdasarkan kebutuhan agama, kehidupan, usaha, dan manfaat nyata.</p>
           <ul>
             <li>Ilmu agama: aqidah, fiqih, bahasa Arab, adab.</li>
             <li>Ilmu dunia: usaha, teknologi, komunikasi, manajemen uang.</li>
@@ -335,10 +368,10 @@
 
       <details>
         <summary>
-          <div class="num">03</div>
+          <div class="num">04</div>
           <div class="head">
             <h2>Amal — Jalankan yang Dicatat</h2>
-            <p>Catatan tidak bernilai kalau tidak berubah menjadi tindakan.</p>
+            <p>Catatan tidak bernilai kalau tidak berubah menjadi tindakan nyata.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
@@ -355,30 +388,9 @@
 
       <details>
         <summary>
-          <div class="num">04</div>
-          <div class="head">
-            <h2>Uang — Menciptakan Nilai</h2>
-            <p>Fokus bukan sekadar cari uang, tapi memberi manfaat yang dibayar.</p>
-          </div>
-          <div class="chev">⌄</div>
-        </summary>
-        <div class="body">
-          <p><b>Intinya:</b> uang datang dari nilai, manfaat, dan kepercayaan. Maka jangan hanya bertanya “bagaimana dapat uang?”, tapi “masalah apa yang bisa saya selesaikan?”</p>
-          <ul>
-            <li>Masalah apa yang bisa saya selesaikan?</li>
-            <li>Siapa yang terbantu?</li>
-            <li>Apakah ini bisa jadi usaha?</li>
-            <li>Apakah bisa dibuat sistem?</li>
-          </ul>
-          <div class="formula">Ilmu → Amal → Manfaat → Kepercayaan → Uang.</div>
-        </div>
-      </details>
-
-      <details>
-        <summary>
           <div class="num">05</div>
           <div class="head">
-            <h2>Proyek — Maksimal Tiga Fokus</h2>
+            <h2>Fokus — Maksimal Tiga Proyek</h2>
             <p>Terlalu banyak ide membuat banyak hal dimulai, tapi sedikit yang selesai.</p>
           </div>
           <div class="chev">⌄</div>
@@ -398,20 +410,20 @@
         <summary>
           <div class="num">06</div>
           <div class="head">
-            <h2>Disiplin — Rutin Walau Kecil</h2>
-            <p>Jangan menunggu semangat. Mulai kecil, tapi jangan berhenti.</p>
+            <h2>Nilai dan Uang — Memberi Manfaat</h2>
+            <p>Uang datang dari nilai, manfaat, kepercayaan, dan penyelesaian masalah.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
         <div class="body">
-          <p><b>Intinya:</b> disiplin bukan berarti melakukan hal besar setiap hari, tapi menjaga langkah kecil tetap berjalan.</p>
+          <p><b>Intinya:</b> jangan hanya bertanya “bagaimana dapat uang?”, tetapi “masalah apa yang bisa saya selesaikan?”</p>
           <ul>
-            <li>Setiap hari ada ibadah yang diperbaiki.</li>
-            <li>Setiap hari ada ilmu yang dipelajari.</li>
-            <li>Setiap hari ada sesuatu yang dibuat.</li>
-            <li>Setiap hari ada langkah menuju penghasilan.</li>
+            <li>Masalah apa yang bisa saya selesaikan?</li>
+            <li>Siapa yang terbantu?</li>
+            <li>Apakah ini bisa jadi usaha?</li>
+            <li>Apakah bisa dibuat sistem?</li>
           </ul>
-          <div class="formula">Kecil + rutin = besar.</div>
+          <div class="formula">Ilmu → Amal → Manfaat → Kepercayaan → Uang.</div>
         </div>
       </details>
 
@@ -420,19 +432,19 @@
           <div class="num">07</div>
           <div class="head">
             <h2>Waktu — Jangan Bocor</h2>
-            <p>Waktu adalah modal. Kalau bocor, ilmu dan usaha ikut lemah.</p>
+            <p>Waktu adalah modal. Kalau waktu bocor, ilmu, usaha, dan ibadah ikut lemah.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
         <div class="body">
-          <p><b>Intinya:</b> waktu yang hilang tidak selalu karena sibuk, tapi sering karena tidak sadar dipakai untuk hal kecil yang tidak membawa hasil.</p>
+          <p><b>Intinya:</b> waktu sering hilang bukan karena tidak punya waktu, tapi karena tidak sadar dipakai untuk hal yang tidak membawa hasil.</p>
           <ul>
             <li>Kurangi scroll tanpa tujuan.</li>
             <li>Kurangi menunda.</li>
             <li>Kurangi pindah-pindah rencana.</li>
             <li>Utamakan ibadah, belajar, kerja, dan istirahat.</li>
           </ul>
-          <div class="formula">Setiap malam: apa yang bermanfaat hari ini?</div>
+          <div class="formula">Waktu dijaga → hidup lebih terkendali.</div>
         </div>
       </details>
 
@@ -441,7 +453,7 @@
           <div class="num">08</div>
           <div class="head">
             <h2>Kesehatan — Mesin Perjuangan</h2>
-            <p>Tubuh dan pikiran harus dijaga agar ibadah, belajar, dan kerja kuat.</p>
+            <p>Tubuh dan pikiran harus dijaga agar kuat beribadah, belajar, dan bekerja.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
@@ -461,20 +473,23 @@
         <summary>
           <div class="num">09</div>
           <div class="head">
-            <h2>Mengajar — Ilmu yang Dihidupkan</h2>
-            <p>Ilmu lebih kuat ketika dipahami, diamalkan, lalu diajarkan.</p>
+            <h2>Evaluasi — Perbaikan Harian</h2>
+            <p>Hidup membaik jika ada yang dicek, diperbaiki, dan diulang setiap hari.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
         <div class="body">
-          <p><b>Intinya:</b> mengajar bukan untuk terlihat pintar, tapi agar ilmu hidup dan bermanfaat.</p>
-          <ul>
-            <li>Jangan mengajar sebelum paham.</li>
-            <li>Jangan hanya bicara, beri contoh.</li>
-            <li>Ajarkan dari yang sederhana.</li>
-            <li>Catatan hari ini bisa menjadi bahan ajar nanti.</li>
-          </ul>
-          <div class="formula">Pahami → amalkan → ringkas → ajarkan.</div>
+          <p><b>Intinya:</b> evaluasi membuat catatan menjadi alat kontrol, bukan hanya bacaan.</p>
+
+          <div class="daily">
+            <div class="check">□ Apa yang saya pelajari hari ini?</div>
+            <div class="check">□ Apa yang saya kerjakan hari ini?</div>
+            <div class="check">□ Apa yang saya hasilkan hari ini?</div>
+            <div class="check">□ Kesalahan apa yang perlu diperbaiki?</div>
+            <div class="check">□ Apa langkah kecil untuk besok?</div>
+          </div>
+
+          <div class="formula">Hari dievaluasi → besok lebih terarah.</div>
         </div>
       </details>
 
@@ -482,13 +497,34 @@
         <summary>
           <div class="num">10</div>
           <div class="head">
+            <h2>Mengajar dan Warisan</h2>
+            <p>Ilmu yang dicatat hari ini bisa menjadi bahan ajar dan manfaat nanti.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> mengajar bukan untuk terlihat pintar, tapi agar ilmu hidup, bermanfaat, dan terus mengalir.</p>
+          <ul>
+            <li>Pahami sebelum mengajarkan.</li>
+            <li>Amalkan sebelum menyampaikan.</li>
+            <li>Ringkas agar mudah dipahami.</li>
+            <li>Ajarkan dari yang sederhana.</li>
+          </ul>
+          <div class="formula">Pahami → amalkan → ringkas → ajarkan → tinggalkan manfaat.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="num">11</div>
+          <div class="head">
             <h2>Jangan Dilakukan</h2>
             <p>Kadang hidup maju bukan karena menambah, tapi karena menghapus.</p>
           </div>
           <div class="chev">⌄</div>
         </summary>
         <div class="body">
-          <p><b>Intinya:</b> daftar larangan pribadi menjaga hidup dari kebocoran fokus.</p>
+          <p><b>Intinya:</b> daftar larangan pribadi menjaga hidup dari kebocoran fokus, waktu, dan niat.</p>
           <ul>
             <li>Jangan mencatat tanpa menjalankan.</li>
             <li>Jangan belajar tanpa output.</li>
@@ -497,7 +533,7 @@
             <li>Jangan menunggu sempurna.</li>
             <li>Jangan mengorbankan agama demi dunia.</li>
           </ul>
-          <div class="formula">Fokus bukan hanya memilih, tapi juga menolak.</div>
+          <div class="formula">Fokus bukan hanya memilih, tapi juga berani menolak.</div>
         </div>
       </details>
 
@@ -505,9 +541,9 @@
 
     <section class="closing">
       <b>Kesimpulan:</b><br>
-      Hidup yang baik adalah hidup yang memiliki arah, ilmu, amal, manfaat,
-      disiplin, kesehatan, dan warisan kebaikan.
-      Catatan ini bukan untuk dikagumi, tapi untuk dijalankan.
+      Hidup yang baik adalah hidup yang memiliki arah, adab, ilmu, amal,
+      fokus, manfaat, disiplin, kesehatan, evaluasi, dan warisan kebaikan.
+      Catatan ini bukan untuk dikagumi, tetapi untuk dijalankan sedikit demi sedikit.
     </section>
 
   </main>
