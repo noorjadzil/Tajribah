@@ -3,525 +3,513 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laporan Penjualan Harian</title>
+  <title>Catatan Hidup</title>
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f1f5f9;
-      color: #0f172a;
+    :root {
+      --bg1: #020617;
+      --bg2: #0f172a;
+      --card: rgba(255,255,255,.075);
+      --card2: rgba(255,255,255,.115);
+      --line: rgba(255,255,255,.14);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --soft: #94a3b8;
+      --gold: #facc15;
+      --blue: #38bdf8;
+      --radius: 22px;
     }
 
-    header {
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
-      color: white;
-      padding: 18px;
-      text-align: center;
-    }
-
-    .container {
-      padding: 14px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 14px;
-      box-shadow: 0 3px 10px rgba(0,0,0,.08);
-    }
-
-    h2 {
-      margin-top: 0;
-      font-size: 18px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
+    * {
       box-sizing: border-box;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 14px;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.22), transparent 32%),
+        radial-gradient(circle at top right, rgba(250,204,21,.10), transparent 28%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      padding: 22px;
     }
 
-    th, td {
-      border: 1px solid #cbd5e1;
-      padding: 7px;
-      text-align: center;
+    .wrap {
+      max-width: 980px;
+      margin: auto;
     }
 
-    th {
-      background: #e2e8f0;
+    .hero {
+      padding: 34px 0 26px;
     }
 
-    .left {
-      text-align: left;
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.06);
+      font-size: 13px;
+      margin-bottom: 18px;
     }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      margin-top: 10px;
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 18px var(--gold);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 1.02;
+      letter-spacing: -1.8px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0 26px;
+    }
+
+    .mini {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.055);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .mini b {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .mini span {
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    .section-title {
+      margin: 28px 0 14px;
+      color: var(--soft);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 18px 55px rgba(0,0,0,.18);
+      backdrop-filter: blur(14px);
+    }
+
+    details[open] {
+      border-color: rgba(250,204,21,.34);
+    }
+
+    summary {
+      list-style: none;
       cursor: pointer;
-      font-size: 15px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 15px;
+      align-items: center;
     }
 
-    .primary {
-      background: #1e3a8a;
-      color: white;
+    summary::-webkit-details-marker {
+      display: none;
     }
 
-    .green {
-      background: #15803d;
-      color: white;
+    .num {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(250,204,21,.13);
+      color: var(--gold);
+      font-weight: 800;
+      border: 1px solid rgba(250,204,21,.22);
     }
 
-    .red {
-      background: #b91c1c;
-      color: white;
+    .head h2 {
+      margin: 0 0 5px;
+      font-size: 19px;
+      letter-spacing: -.3px;
     }
 
-    .total-box {
-      font-size: 20px;
-      font-weight: bold;
-      background: #ecfeff;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 10px;
+    .head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .small {
-      font-size: 12px;
-      color: #64748b;
+    .chev {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      transition: .2s;
+    }
+
+    details[open] .chev {
+      transform: rotate(180deg);
+      color: var(--gold);
+      border-color: rgba(250,204,21,.35);
+    }
+
+    .body {
+      padding: 0 20px 22px 77px;
+      color: #e2e8f0;
+      line-height: 1.8;
+    }
+
+    .body b {
+      color: #fff;
+    }
+
+    .body ul {
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .body li {
+      margin: 8px 0;
+    }
+
+    .formula {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(2,6,23,.45);
+      border: 1px solid var(--line);
+      color: #fde68a;
+      font-weight: 700;
+    }
+
+    .closing {
+      margin: 24px 0 40px;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(250,204,21,.25);
+      background: linear-gradient(135deg, rgba(250,204,21,.12), rgba(56,189,248,.08));
+      line-height: 1.8;
+      color: #f8fafc;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
+      .summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      summary {
+        grid-template-columns: auto 1fr auto;
+        padding: 16px;
+      }
+
+      .body {
+        padding: 0 16px 18px 16px;
+      }
+
+      .num {
+        width: 38px;
+        height: 38px;
+      }
     }
   </style>
 </head>
+
 <body>
+  <main class="wrap">
 
-<header>
-  <h1>Laporan Penjualan Harian</h1>
-  <p>Bubur Extra Topping</p>
-</header>
+    <section class="hero">
+      <div class="badge">
+        <span class="dot"></span>
+        Catatan inti untuk arah hidup, ilmu, usaha, dan amal
+      </div>
 
-<div class="container">
+      <h1>Catatan Hidup<br>yang Dijalankan</h1>
 
-  <div class="card">
-    <h2>Data Laporan</h2>
+      <p>
+        Dibuat ringkas agar cepat dipahami, namun tetap memiliki penjelasan mendalam
+        ketika ingin direnungkan. Bukan sekadar catatan motivasi, tapi peta tindakan.
+      </p>
+    </section>
 
-    <label>Tanggal</label>
-    <input type="date" id="tanggal">
+    <section class="summary">
+      <div class="mini">
+        <b>Arah</b>
+        <span>Iman & tujuan</span>
+      </div>
+      <div class="mini">
+        <b>Ilmu</b>
+        <span>Belajar tepat</span>
+      </div>
+      <div class="mini">
+        <b>Amal</b>
+        <span>Eksekusi nyata</span>
+      </div>
+      <div class="mini">
+        <b>Nilai</b>
+        <span>Manfaat & uang</span>
+      </div>
+    </section>
 
-    <label>Catatan</label>
-    <textarea id="catatan" placeholder="Contoh: setor, kurang, tambahan stok..."></textarea>
-  </div>
+    <div class="section-title">Pilar Utama</div>
 
-  <div class="card">
-    <h2>Penjualan Bubur</h2>
-    <table id="tabelProduk">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Harga</th>
-          <th>Jumlah</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+    <section class="grid">
 
-  <div class="card">
-    <h2>Extra Topping / Tambahan</h2>
-    <table id="tabelExtra">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Harga</th>
-          <th>Jumlah</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+      <details open>
+        <summary>
+          <div class="num">01</div>
+          <div class="head">
+            <h2>Iman — Arah Hidup</h2>
+            <p>Semua ilmu, usaha, dan uang harus mengarah kepada ridha Allah.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> seseorang bisa sibuk, pintar, dan kaya, tetapi tetap kehilangan arah jika tidak memiliki tujuan akhir yang benar.</p>
+          <ul>
+            <li>Untuk apa saya hidup?</li>
+            <li>Apa yang membuat Allah ridha?</li>
+            <li>Apakah yang saya kejar bermanfaat untuk akhirat?</li>
+          </ul>
+          <div class="formula">Arah benar → pilihan benar → hidup lebih teratur.</div>
+        </div>
+      </details>
 
-  <div class="card">
-    <h2>Minuman / Lainnya</h2>
-    <table id="tabelMinuman">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Harga</th>
-          <th>Jumlah</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+      <details>
+        <summary>
+          <div class="num">02</div>
+          <div class="head">
+            <h2>Ilmu — Belajar yang Dibutuhkan</h2>
+            <p>Jangan belajar semua hal. Pelajari yang dibutuhkan dan bermanfaat.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> ilmu harus dipilih berdasarkan kebutuhan hidup, agama, usaha, dan manfaat nyata.</p>
+          <ul>
+            <li>Ilmu agama: aqidah, fiqih, bahasa Arab, adab.</li>
+            <li>Ilmu dunia: usaha, teknologi, komunikasi, manajemen uang.</li>
+            <li>Belajar harus menghasilkan pemahaman dan tindakan.</li>
+          </ul>
+          <div class="formula">Baca → Ringkas → Praktik → Ajarkan → Ulangi.</div>
+        </div>
+      </details>
 
-  <div class="card">
-    <h2>Stok Perlengkapan</h2>
-    <table id="tabelStok">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Stok Awal</th>
-          <th>Sisa</th>
-          <th>Laku</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+      <details>
+        <summary>
+          <div class="num">03</div>
+          <div class="head">
+            <h2>Amal — Jalankan yang Dicatat</h2>
+            <p>Catatan tidak bernilai kalau tidak berubah menjadi tindakan.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> jangan menjadikan catatan sebagai tempat menumpuk teori. Setiap catatan harus mendorong langkah kecil.</p>
+          <ul>
+            <li>Jangan hanya mengumpulkan ilmu.</li>
+            <li>Setiap catatan harus punya tindakan.</li>
+            <li>Selesai lebih baik daripada sempurna tapi tidak jadi.</li>
+          </ul>
+          <div class="formula">Ilmu yang benar tampak pada amal.</div>
+        </div>
+      </details>
 
-  <div class="card">
-    <h2>Kekurangan / Catatan Barang</h2>
-    <table id="tabelKurang">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Kurang</th>
-          <th>Cukup</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+      <details>
+        <summary>
+          <div class="num">04</div>
+          <div class="head">
+            <h2>Uang — Menciptakan Nilai</h2>
+            <p>Fokus bukan sekadar cari uang, tapi memberi manfaat yang dibayar.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> uang datang dari nilai, manfaat, dan kepercayaan. Maka jangan hanya bertanya “bagaimana dapat uang?”, tapi “masalah apa yang bisa saya selesaikan?”</p>
+          <ul>
+            <li>Masalah apa yang bisa saya selesaikan?</li>
+            <li>Siapa yang terbantu?</li>
+            <li>Apakah ini bisa jadi usaha?</li>
+            <li>Apakah bisa dibuat sistem?</li>
+          </ul>
+          <div class="formula">Ilmu → Amal → Manfaat → Kepercayaan → Uang.</div>
+        </div>
+      </details>
 
-  <div class="card">
-    <h2>Total Semua</h2>
-    <div class="total-box" id="grandTotal">Rp 0</div>
+      <details>
+        <summary>
+          <div class="num">05</div>
+          <div class="head">
+            <h2>Proyek — Maksimal Tiga Fokus</h2>
+            <p>Terlalu banyak ide membuat banyak hal dimulai, tapi sedikit yang selesai.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> batasi proyek agar energi tidak pecah.</p>
+          <ul>
+            <li>Satu proyek utama untuk menghasilkan.</li>
+            <li>Satu proyek belajar untuk menaikkan skill.</li>
+            <li>Satu proyek ibadah untuk memperbaiki diri.</li>
+          </ul>
+          <div class="formula">Proyek baru masuk → proyek lama harus keluar.</div>
+        </div>
+      </details>
 
-    <button class="primary" onclick="simpan()">Simpan Laporan</button>
-    <button class="green" onclick="kirimWA()">Kirim ke WhatsApp</button>
-    <button class="red" onclick="hapusData()">Hapus Data Hari Ini</button>
+      <details>
+        <summary>
+          <div class="num">06</div>
+          <div class="head">
+            <h2>Disiplin — Rutin Walau Kecil</h2>
+            <p>Jangan menunggu semangat. Mulai kecil, tapi jangan berhenti.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> disiplin bukan berarti melakukan hal besar setiap hari, tapi menjaga langkah kecil tetap berjalan.</p>
+          <ul>
+            <li>Setiap hari ada ibadah yang diperbaiki.</li>
+            <li>Setiap hari ada ilmu yang dipelajari.</li>
+            <li>Setiap hari ada sesuatu yang dibuat.</li>
+            <li>Setiap hari ada langkah menuju penghasilan.</li>
+          </ul>
+          <div class="formula">Kecil + rutin = besar.</div>
+        </div>
+      </details>
 
-    <p class="small">Data tersimpan di HP/browser menggunakan localStorage.</p>
-  </div>
+      <details>
+        <summary>
+          <div class="num">07</div>
+          <div class="head">
+            <h2>Waktu — Jangan Bocor</h2>
+            <p>Waktu adalah modal. Kalau bocor, ilmu dan usaha ikut lemah.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> waktu yang hilang tidak selalu karena sibuk, tapi sering karena tidak sadar dipakai untuk hal kecil yang tidak membawa hasil.</p>
+          <ul>
+            <li>Kurangi scroll tanpa tujuan.</li>
+            <li>Kurangi menunda.</li>
+            <li>Kurangi pindah-pindah rencana.</li>
+            <li>Utamakan ibadah, belajar, kerja, dan istirahat.</li>
+          </ul>
+          <div class="formula">Setiap malam: apa yang bermanfaat hari ini?</div>
+        </div>
+      </details>
 
-</div>
+      <details>
+        <summary>
+          <div class="num">08</div>
+          <div class="head">
+            <h2>Kesehatan — Mesin Perjuangan</h2>
+            <p>Tubuh dan pikiran harus dijaga agar ibadah, belajar, dan kerja kuat.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> kesehatan bukan tujuan utama, tapi alat untuk menjalankan tujuan besar.</p>
+          <ul>
+            <li>Tidur cukup.</li>
+            <li>Makan yang baik.</li>
+            <li>Bergerak setiap hari.</li>
+            <li>Jaga pikiran dari hal yang melemahkan.</li>
+          </ul>
+          <div class="formula">Energi terjaga → amal lebih kuat.</div>
+        </div>
+      </details>
 
-<script>
-  const produk = [
-    { nama: "Bubur Ori", harga: 7000 },
-    { nama: "Bubur Cakwe", harga: 12000 },
-    { nama: "Bubur Telur", harga: 12000 },
-    { nama: "Bubur Ayam Suwir", harga: 15000 },
-    { nama: "Bubur Abon", harga: 17000 },
-    { nama: "Bubur Spesial", harga: 13000 },
-    { nama: "Bubur Istimewa", harga: 17000 },
-  ];
+      <details>
+        <summary>
+          <div class="num">09</div>
+          <div class="head">
+            <h2>Mengajar — Ilmu yang Dihidupkan</h2>
+            <p>Ilmu lebih kuat ketika dipahami, diamalkan, lalu diajarkan.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> mengajar bukan untuk terlihat pintar, tapi agar ilmu hidup dan bermanfaat.</p>
+          <ul>
+            <li>Jangan mengajar sebelum paham.</li>
+            <li>Jangan hanya bicara, beri contoh.</li>
+            <li>Ajarkan dari yang sederhana.</li>
+            <li>Catatan hari ini bisa menjadi bahan ajar nanti.</li>
+          </ul>
+          <div class="formula">Pahami → amalkan → ringkas → ajarkan.</div>
+        </div>
+      </details>
 
-  const extra = [
-    { nama: "Cakwe", harga: 2000 },
-    { nama: "Ayam Suwir", harga: 3000 },
-    { nama: "Abon", harga: 5000 },
-    { nama: "Irisan Telur Dadar", harga: 1000 },
-    { nama: "Telur Rebus", harga: 1000 },
-    { nama: "Kuah", harga: 500 },
-    { nama: "Krupuk", harga: 500 },
-  ];
+      <details>
+        <summary>
+          <div class="num">10</div>
+          <div class="head">
+            <h2>Jangan Dilakukan</h2>
+            <p>Kadang hidup maju bukan karena menambah, tapi karena menghapus.</p>
+          </div>
+          <div class="chev">⌄</div>
+        </summary>
+        <div class="body">
+          <p><b>Intinya:</b> daftar larangan pribadi menjaga hidup dari kebocoran fokus.</p>
+          <ul>
+            <li>Jangan mencatat tanpa menjalankan.</li>
+            <li>Jangan belajar tanpa output.</li>
+            <li>Jangan membuka banyak proyek.</li>
+            <li>Jangan mengejar cepat kaya.</li>
+            <li>Jangan menunggu sempurna.</li>
+            <li>Jangan mengorbankan agama demi dunia.</li>
+          </ul>
+          <div class="formula">Fokus bukan hanya memilih, tapi juga menolak.</div>
+        </div>
+      </details>
 
-  const minuman = [
-    { nama: "Puyuh", harga: 3000 },
-    { nama: "Cleo", harga: 1000 },
-    { nama: "Teh Anget", harga: 3000 },
-    { nama: "Es Teh", harga: 3000 },
-  ];
+    </section>
 
-  const stok = [
-    "Paper Bowl",
-    "Tali Segel",
-    "Sendok",
-    "Krupuk",
-    "Kripik Pangsit",
-    "Bawang Goreng",
-    "Kacang Kedelai"
-  ];
+    <section class="closing">
+      <b>Kesimpulan:</b><br>
+      Hidup yang baik adalah hidup yang memiliki arah, ilmu, amal, manfaat,
+      disiplin, kesehatan, dan warisan kebaikan.
+      Catatan ini bukan untuk dikagumi, tapi untuk dijalankan.
+    </section>
 
-  const kurang = [
-    "Cleo",
-    "Tisu",
-    "Plastik Kecap",
-    "Plastik Kuah",
-    "Plastik Sambal",
-    "Kecap Asin",
-    "Kecap Manis",
-    "Lada",
-    "Kresek Kecil",
-    "Kresek Tanggung",
-    "Kresek Besar"
-  ];
-
-  document.getElementById("tanggal").valueAsDate = new Date();
-
-  function rupiah(angka) {
-    return "Rp " + Number(angka || 0).toLocaleString("id-ID");
-  }
-
-  function buatTabelBarang(id, data, prefix) {
-    const tbody = document.querySelector(`#${id} tbody`);
-    tbody.innerHTML = "";
-
-    data.forEach((item, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td class="left">${item.nama}</td>
-          <td>${rupiah(item.harga)}</td>
-          <td>
-            <input type="number" min="0" id="${prefix}_jumlah_${i}" value="0" oninput="hitung()">
-          </td>
-          <td id="${prefix}_total_${i}">Rp 0</td>
-        </tr>
-      `;
-    });
-  }
-
-  function buatTabelStok() {
-    const tbody = document.querySelector("#tabelStok tbody");
-    tbody.innerHTML = "";
-
-    stok.forEach((nama, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td class="left">${nama}</td>
-          <td><input type="number" id="stok_awal_${i}" value="0" oninput="hitungStok(${i})"></td>
-          <td><input type="number" id="stok_laku_${i}" value="0" oninput="hitungStok(${i})"></td>
-          <td id="stok_sisa_${i}">0</td>
-        </tr>
-      `;
-    });
-  }
-
-  function buatTabelKurang() {
-    const tbody = document.querySelector("#tabelKurang tbody");
-    tbody.innerHTML = "";
-
-    kurang.forEach((nama, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td class="left">${nama}</td>
-          <td><input type="checkbox" id="kurang_${i}"></td>
-          <td><input type="checkbox" id="cukup_${i}"></td>
-        </tr>
-      `;
-    });
-  }
-
-  function hitung() {
-    let totalSemua = 0;
-
-    totalSemua += hitungBarang(produk, "produk");
-    totalSemua += hitungBarang(extra, "extra");
-    totalSemua += hitungBarang(minuman, "minuman");
-
-    document.getElementById("grandTotal").innerText = rupiah(totalSemua);
-  }
-
-  function hitungBarang(data, prefix) {
-    let total = 0;
-
-    data.forEach((item, i) => {
-      const jumlah = Number(document.getElementById(`${prefix}_jumlah_${i}`).value || 0);
-      const subtotal = jumlah * item.harga;
-      total += subtotal;
-      document.getElementById(`${prefix}_total_${i}`).innerText = rupiah(subtotal);
-    });
-
-    return total;
-  }
-
-  function hitungStok(i) {
-    const awal = Number(document.getElementById(`stok_awal_${i}`).value || 0);
-    const laku = Number(document.getElementById(`stok_laku_${i}`).value || 0);
-    document.getElementById(`stok_sisa_${i}`).innerText = awal - laku;
-  }
-
-  function ambilBarang(data, prefix) {
-    return data.map((item, i) => {
-      const jumlah = Number(document.getElementById(`${prefix}_jumlah_${i}`).value || 0);
-      return {
-        nama: item.nama,
-        harga: item.harga,
-        jumlah,
-        total: jumlah * item.harga
-      };
-    });
-  }
-
-  function ambilStok() {
-    return stok.map((nama, i) => {
-      const awal = Number(document.getElementById(`stok_awal_${i}`).value || 0);
-      const laku = Number(document.getElementById(`stok_laku_${i}`).value || 0);
-      return {
-        nama,
-        stokAwal: awal,
-        stokLaku: laku,
-        sisa: awal - laku
-      };
-    });
-  }
-
-  function ambilKurang() {
-    return kurang.map((nama, i) => ({
-      nama,
-      kurang: document.getElementById(`kurang_${i}`).checked,
-      cukup: document.getElementById(`cukup_${i}`).checked
-    }));
-  }
-
-  function buatData() {
-    const dataProduk = ambilBarang(produk, "produk");
-    const dataExtra = ambilBarang(extra, "extra");
-    const dataMinuman = ambilBarang(minuman, "minuman");
-
-    const total =
-      dataProduk.reduce((a, b) => a + b.total, 0) +
-      dataExtra.reduce((a, b) => a + b.total, 0) +
-      dataMinuman.reduce((a, b) => a + b.total, 0);
-
-    return {
-      tanggal: document.getElementById("tanggal").value,
-      catatan: document.getElementById("catatan").value,
-      produk: dataProduk,
-      extra: dataExtra,
-      minuman: dataMinuman,
-      stok: ambilStok(),
-      kurang: ambilKurang(),
-      total
-    };
-  }
-
-  function simpan() {
-    const data = buatData();
-    localStorage.setItem("laporan_" + data.tanggal, JSON.stringify(data));
-    alert("Laporan berhasil disimpan");
-  }
-
-  function muatData() {
-    const tanggal = document.getElementById("tanggal").value;
-    const data = JSON.parse(localStorage.getItem("laporan_" + tanggal) || "null");
-    if (!data) return;
-
-    document.getElementById("catatan").value = data.catatan || "";
-
-    isiBarang(data.produk, "produk");
-    isiBarang(data.extra, "extra");
-    isiBarang(data.minuman, "minuman");
-
-    data.stok?.forEach((item, i) => {
-      if (document.getElementById(`stok_awal_${i}`)) {
-        document.getElementById(`stok_awal_${i}`).value = item.stokAwal;
-        document.getElementById(`stok_laku_${i}`).value = item.stokLaku;
-        document.getElementById(`stok_sisa_${i}`).innerText = item.sisa;
-      }
-    });
-
-    data.kurang?.forEach((item, i) => {
-      if (document.getElementById(`kurang_${i}`)) {
-        document.getElementById(`kurang_${i}`).checked = item.kurang;
-        document.getElementById(`cukup_${i}`).checked = item.cukup;
-      }
-    });
-
-    hitung();
-  }
-
-  function isiBarang(data, prefix) {
-    data?.forEach((item, i) => {
-      if (document.getElementById(`${prefix}_jumlah_${i}`)) {
-        document.getElementById(`${prefix}_jumlah_${i}`).value = item.jumlah;
-      }
-    });
-  }
-
-  function kirimWA() {
-    const data = buatData();
-
-    let teks = `*LAPORAN PENJUALAN HARIAN*\n`;
-    teks += `Tanggal: ${data.tanggal}\n\n`;
-
-    teks += `*PENJUALAN BUBUR*\n`;
-    teks += buatTeksBarang(data.produk);
-
-    teks += `\n*EXTRA TOPPING*\n`;
-    teks += buatTeksBarang(data.extra);
-
-    teks += `\n*MINUMAN / LAINNYA*\n`;
-    teks += buatTeksBarang(data.minuman);
-
-    teks += `\n*STOK PERLENGKAPAN*\n`;
-    data.stok.forEach(item => {
-      if (item.stokAwal || item.stokLaku) {
-        teks += `${item.nama}: awal ${item.stokAwal}, laku ${item.stokLaku}, sisa ${item.sisa}\n`;
-      }
-    });
-
-    teks += `\n*BARANG KURANG*\n`;
-    data.kurang.forEach(item => {
-      if (item.kurang) teks += `- ${item.nama}\n`;
-    });
-
-    teks += `\n*TOTAL SEMUA: ${rupiah(data.total)}*`;
-
-    if (data.catatan) {
-      teks += `\n\nCatatan:\n${data.catatan}`;
-    }
-
-    window.open("https://wa.me/?text=" + encodeURIComponent(teks), "_blank");
-  }
-
-  function buatTeksBarang(data) {
-    let teks = "";
-    data.forEach(item => {
-      if (item.jumlah > 0) {
-        teks += `${item.nama} x${item.jumlah} = ${rupiah(item.total)}\n`;
-      }
-    });
-    return teks || "-\n";
-  }
-
-  function hapusData() {
-    const tanggal = document.getElementById("tanggal").value;
-    if (confirm("Hapus data tanggal ini?")) {
-      localStorage.removeItem("laporan_" + tanggal);
-      location.reload();
-    }
-  }
-
-  document.getElementById("tanggal").addEventListener("change", () => {
-    location.reload();
-  });
-
-  buatTabelBarang("tabelProduk", produk, "produk");
-  buatTabelBarang("tabelExtra", extra, "extra");
-  buatTabelBarang("tabelMinuman", minuman, "minuman");
-  buatTabelStok();
-  buatTabelKurang();
-  muatData();
-  hitung();
-</script>
-
+  </main>
 </body>
 </html>
